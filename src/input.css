@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --progress-value: 0deg;
+    --progress-ring: #0ea5e9;
+    --progress-track: rgba(148, 163, 184, 0.28);
+  }
+
+  .dark {
+    color-scheme: dark;
+    --progress-ring: #22d3ee;
+    --progress-track: rgba(71, 85, 105, 0.75);
+  }
+
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  ::selection {
+    @apply bg-sky-200 text-slate-950 dark:bg-cyan-400/30 dark:text-white;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-sm font-medium text-slate-700 transition hover:text-sky-600 dark:text-slate-300 dark:hover:text-cyan-300;
+  }
+
+  .mobile-nav-link {
+    @apply rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-100 hover:text-sky-600 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-cyan-300;
+  }
+
+  .footer-link {
+    @apply transition hover:text-sky-600 dark:hover:text-cyan-300;
+  }
+
+  .icon-button {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 shadow-sm shadow-slate-900/5 transition hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700 dark:hover:bg-slate-800;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-slate-950 px-6 text-sm font-semibold text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-cyan-300 dark:text-slate-950 dark:shadow-cyan-950/30 dark:hover:bg-cyan-200;
+  }
+
+  .btn-secondary,
+  .project-button,
+  .contact-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 text-sm font-semibold text-slate-900 shadow-sm shadow-slate-900/5 transition hover:-translate-y-0.5 hover:border-slate-950 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-cyan-300 dark:hover:bg-slate-800;
+  }
+
+  .social-link {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full bg-slate-950 text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-sky-600 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-cyan-300;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-6xl px-5 py-10 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-center text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl;
+  }
+
+  .soft-panel {
+    @apply rounded-[2rem] border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-900/[0.04] backdrop-blur dark:border-slate-800 dark:bg-slate-900/55 dark:shadow-black/20;
+  }
+
+  .soft-card,
+  .skill-card,
+  .project-card {
+    @apply border border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70;
+  }
+
+  .skill-card {
+    @apply rounded-3xl p-7 shadow-lg shadow-slate-900/[0.045] transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/[0.07] dark:shadow-black/20;
+  }
+
+  .skill-icon {
+    @apply mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl;
+  }
+
+  .skill-title {
+    @apply text-base font-bold text-slate-950 dark:text-white;
+  }
+
+  .skill-list {
+    @apply mt-5 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-300;
+  }
+
+  .skill-list li {
+    @apply relative pl-5;
+  }
+
+  .skill-list li::before {
+    content: "";
+    @apply absolute left-0 top-[0.68rem] h-1.5 w-1.5 rounded-full bg-sky-500 dark:bg-cyan-300;
+  }
+
+  .project-card {
+    @apply rounded-3xl p-5 shadow-lg shadow-slate-900/[0.045] transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/[0.07] dark:shadow-black/20;
+  }
+
+  .project-image {
+    @apply h-40 w-full rounded-2xl border border-slate-200 bg-slate-50 object-cover dark:border-slate-800 dark:bg-slate-950;
+  }
+
+  .scroll-progress {
+    background: conic-gradient(var(--progress-ring) var(--progress-value), var(--progress-track) 0);
+    @apply fixed bottom-6 right-6 z-50 grid h-16 w-16 place-items-center rounded-full p-1 opacity-0 shadow-xl shadow-slate-900/20 transition duration-300 pointer-events-none dark:shadow-black/40;
+  }
+
+  .scroll-progress.is-visible {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  .scroll-progress span {
+    @apply grid h-full w-full place-items-center rounded-full bg-slate-950 text-white transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-950 dark:hover:bg-cyan-200;
+  }
+}
