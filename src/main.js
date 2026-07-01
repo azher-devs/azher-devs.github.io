@@ -3,6 +3,14 @@ const themeToggle = document.querySelector("#theme-toggle");
 const menuToggle = document.querySelector("#menu-toggle");
 const mobileMenu = document.querySelector("#mobile-menu");
 const backToTopButton = document.querySelector("#back-to-top");
+const revealElements = document.querySelectorAll(".reveal");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function resetHorizontalScroll() {
+  if (window.scrollX !== 0) {
+    window.scrollTo(0, window.scrollY);
+  }
+}
 
 function setTheme(theme) {
   const isDark = theme === "dark";
@@ -44,5 +52,34 @@ backToTopButton?.addEventListener("click", () => {
 });
 
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
-window.addEventListener("resize", updateScrollProgress);
+window.addEventListener("resize", () => {
+  resetHorizontalScroll();
+  updateScrollProgress();
+});
+window.addEventListener("load", resetHorizontalScroll);
 updateScrollProgress();
+
+function showRevealElement(element) {
+  element.classList.add("is-visible");
+}
+
+if (prefersReducedMotion.matches || !("IntersectionObserver" in window)) {
+  revealElements.forEach(showRevealElement);
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        showRevealElement(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -10% 0px",
+      threshold: 0.12,
+    }
+  );
+
+  revealElements.forEach((element) => revealObserver.observe(element));
+}
