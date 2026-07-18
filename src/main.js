@@ -30,7 +30,7 @@ const projects = [
       "GitHub Pages-friendly static preview",
     ],
     image: "./assets/images/project-dashboard-placeholder.svg",
-    githubUrl: "https://github.com/",
+    githubUrl: "https://github.com/azher-devs",
     liveDemoUrl: "#",
   },
   {
@@ -46,7 +46,7 @@ const projects = [
       "Clean interface for repeated daily use",
     ],
     image: "./assets/images/project-mobile-placeholder.svg",
-    githubUrl: "https://github.com/",
+    githubUrl: "https://github.com/azher-devs",
     liveDemoUrl: "#",
   },
   {
@@ -62,7 +62,7 @@ const projects = [
       "Responsive storefront layout",
     ],
     image: "./assets/images/project-commerce-placeholder.svg",
-    githubUrl: "https://github.com/",
+    githubUrl: "https://github.com/azher-devs",
     liveDemoUrl: "#",
   },
 ];
