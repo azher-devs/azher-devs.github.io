@@ -161,7 +161,7 @@
   }
 
   .project-card {
-    @apply transform-gpu rounded-3xl p-5 shadow-lg shadow-slate-900/[0.045] transition duration-300 ease-out hover:-translate-y-1 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-950/[0.08] dark:shadow-black/20 dark:hover:border-cyan-300/60 dark:hover:shadow-cyan-950/20;
+    @apply cursor-pointer transform-gpu rounded-3xl p-5 shadow-lg shadow-slate-900/[0.045] transition duration-300 ease-out hover:-translate-y-1 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-950/[0.08] dark:shadow-black/20 dark:hover:border-cyan-300/60 dark:hover:shadow-cyan-950/20;
   }
 
   .project-image {
@@ -170,7 +170,7 @@
 
   .scroll-progress {
     background: conic-gradient(var(--progress-ring) var(--progress-value), var(--progress-track) 0);
-    @apply fixed bottom-4 right-4 z-50 grid h-12 w-12 place-items-center rounded-full p-1 opacity-0 shadow-xl shadow-slate-900/20 transition duration-300 pointer-events-none sm:bottom-5 sm:right-5 sm:h-14 sm:w-14 lg:bottom-6 lg:right-6 lg:h-16 lg:w-16 dark:shadow-black/40;
+    @apply fixed bottom-3 right-3 z-50 grid h-11 w-11 place-items-center rounded-full p-1 opacity-0 shadow-xl shadow-slate-900/20 transition duration-300 pointer-events-none sm:bottom-5 sm:right-5 sm:h-14 sm:w-14 lg:bottom-6 lg:right-6 lg:h-16 lg:w-16 dark:shadow-black/40;
   }
 
   .scroll-progress.is-visible {
