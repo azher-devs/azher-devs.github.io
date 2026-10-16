@@ -1,662 +1,126 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth overflow-x-hidden">
+<!doctype html>
+<html lang="en" dir="ltr" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Al Azher Al Kindi's portfolio showcasing .NET software development skills and projects."
-    />
-    <title>Al Azher | Portfolio</title>
-    <script>
-      document.documentElement.classList.add("js");
-
-      const savedTheme = localStorage.getItem("theme");
-
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-    </script>
-    <link
-      rel="preload"
-      as="image"
-      href="./assets/profile-pic-640.avif"
-      imagesrcset="./assets/profile-pic-320.avif 320w, ./assets/profile-pic-640.avif 640w"
-      imagesizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
-      type="image/avif"
-      fetchpriority="high"
-    />
-    <link rel="stylesheet" href="./dist/output.css?v=20260719" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Al Azher Al Kindi's portfolio showcasing .NET software development skills and projects." />
+    <meta name="theme-color" content="#fffaf0" />
+    <title>Al Azher Al Kindi | .NET Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="./assets/hero-portrait.png" fetchpriority="high" />
+    <link rel="stylesheet" href="./dist/output.css?v=portfolio-mobile-layout-20261018" />
   </head>
-  <body
-    class="w-full overflow-x-hidden bg-slate-50 text-slate-950 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100"
-  >
-    <div
-      class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.13),transparent_58%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.13),transparent_58%)]"
-    ></div>
-
-    <header
-      class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/80"
-    >
-      <nav
-        class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
-        aria-label="Primary navigation"
-      >
-        <a href="#home" class="text-lg font-bold tracking-tight">&lt;Azher /&gt;</a>
-
-        <div class="hidden items-center gap-8 md:flex">
-          <a class="nav-link" href="#about">About</a>
-          <a class="nav-link" href="#skills">Skills</a>
-          <a class="nav-link" href="#projects">Projects</a>
-          <a class="nav-link" href="#contact">Contact</a>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary navigation" data-i18n-aria="primaryNavigation">
+        <a class="wordmark" href="#home">&lt;Azher /&gt;</a>
+        <div class="desktop-links">
+          <a href="#about" data-i18n="nav.about">About</a><a href="#skills" data-i18n="nav.skills">Skills</a><a href="#projects" data-i18n="nav.projects">Projects</a><a href="#contact" data-i18n="nav.contact">Contact</a>
         </div>
-
-        <div class="flex items-center gap-2">
-          <button
-            id="theme-toggle"
-            type="button"
-            class="icon-button"
-            aria-label="Toggle dark mode"
-          >
-            <svg
-              class="h-5 w-5 dark:hidden"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2"></path>
-              <path d="M12 20v2"></path>
-              <path d="m4.93 4.93 1.41 1.41"></path>
-              <path d="m17.66 17.66 1.41 1.41"></path>
-              <path d="M2 12h2"></path>
-              <path d="M20 12h2"></path>
-              <path d="m6.34 17.66-1.41 1.41"></path>
-              <path d="m19.07 4.93-1.41 1.41"></path>
-            </svg>
-            <svg
-              class="hidden h-5 w-5 dark:block"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M12 3a6 6 0 0 0 9 7.25A9 9 0 1 1 12 3Z"></path>
-            </svg>
-          </button>
-
-          <button
-            id="menu-toggle"
-            type="button"
-            class="icon-button md:hidden"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-          >
-            <svg
-              class="h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <path d="M4 7h16"></path>
-              <path d="M4 12h16"></path>
-              <path d="M4 17h16"></path>
-            </svg>
-          </button>
-        </div>
+        <button id="language-toggle" class="language-toggle" type="button" aria-label="Switch language to Arabic"><span id="language-toggle-label" lang="ar">عربي</span></button>
+        <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open menu" data-i18n-aria="menu.open" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+        </button>
       </nav>
-
-      <div id="mobile-menu" class="hidden border-t border-slate-200 px-4 py-4 dark:border-slate-800 sm:px-6 md:hidden">
-        <div class="mx-auto grid max-w-6xl gap-3 text-sm font-medium">
-          <a class="mobile-nav-link" href="#about">About</a>
-          <a class="mobile-nav-link" href="#skills">Skills</a>
-          <a class="mobile-nav-link" href="#projects">Projects</a>
-          <a class="mobile-nav-link" href="#contact">Contact</a>
-        </div>
-      </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" data-i18n-aria="mobileNavigation" hidden>
+        <a href="#about" data-i18n="nav.about">About</a><a href="#skills" data-i18n="nav.skills">Skills</a><a href="#projects" data-i18n="nav.projects">Projects</a><a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
     </header>
 
     <main id="home">
-      <section class="mx-auto flex w-full max-w-6xl flex-col items-center gap-8 overflow-hidden px-4 py-10 sm:gap-10 sm:px-6 sm:py-16 lg:flex-row lg:gap-14 lg:px-8 lg:py-24">
-        <div class="w-full lg:flex-1">
-          <p class="text-base font-medium text-slate-500 dark:text-slate-400">
-            Hello, I'm
-          </p>
-          <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-            Al Azher Al Kindi
-          </h1>
-          <p class="mt-3 text-2xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-3xl lg:text-4xl">
-            .NET Software Developer
-          </p>
-          <p class="mt-5 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-            Building practical and reliable applications.
-          </p>
-
-          <div class="mt-8 flex flex-col items-stretch gap-4 min-[380px]:flex-row min-[380px]:items-center">
-            <a class="btn-primary w-full min-[380px]:w-auto" href="#projects">
-              <svg
-                class="h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m13 6 6 6-6 6"></path>
-              </svg>
-              View Projects
+      <section class="hero page-width" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="hero-greeting" data-i18n="hero.greeting">Hello, I’m</p>
+          <h1 id="hero-title" data-i18n-html="hero.name">Al Azher <span>Al Kindi</span></h1>
+          <p class="hero-role" data-i18n-html="hero.role">.NET Software Developer</p>
+          <p class="hero-summary" data-i18n="hero.summary">Building practical and reliable applications.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects"><span data-i18n="hero.projects">View Projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
+            <a class="button button-outline" href="#contact" data-i18n="hero.contact">Contact Me</a>
+          </div>
+          <div class="social-links" aria-label="Social links" data-i18n-aria="socialLinks">
+            <a href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>
             </a>
-            <a class="btn-secondary w-full min-[380px]:w-auto" href="#contact">Contact Me</a>
-          </div>
-
-          <div class="mt-8 flex items-center gap-3" aria-label="Social links">
-            <a class="social-link" href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
-                ></path>
-              </svg>
-            </a>
-            <a class="social-link" href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.34 8h4.31v14H.34V8Zm7.04 0h4.13v1.91h.06c.58-1.09 1.98-2.24 4.08-2.24 4.36 0 5.17 2.87 5.17 6.61V22h-4.3v-6.84c0-1.63-.03-3.73-2.27-3.73-2.28 0-2.63 1.78-2.63 3.61V22H7.38V8Z"></path>
-              </svg>
-            </a>
+            <a href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="Visit LinkedIn profile" data-i18n-aria="social.linkedin" data-i18n-title="social.linkedinTitle"><span class="linkedin-mark">in</span></a>
           </div>
         </div>
+        <div class="hero-art"><img src="./assets/hero-portrait.png" alt="Al Azher Al Kindi in traditional Omani dress" data-i18n-alt="hero.portrait" width="1536" height="1024" fetchpriority="high" /></div>
+      </section>
 
-        <div class="relative mx-auto flex aspect-square w-full max-w-[15rem] shrink-0 items-center justify-center overflow-hidden sm:max-w-sm lg:max-w-md">
-          <div class="animate-orbit absolute inset-4 rounded-full border border-slate-200 dark:border-slate-800"></div>
-          <div class="animate-orbit animate-orbit-slow absolute inset-10 rounded-full border border-dashed border-slate-300 dark:border-slate-700"></div>
-          <div class="absolute inset-16 rounded-full border border-slate-200 dark:border-slate-800"></div>
-          <div class="animate-pulse-soft absolute right-10 top-8 h-4 w-4 rounded-full bg-sky-400 shadow-[0_0_24px_rgba(56,189,248,0.55)]"></div>
-          <div class="animate-orbit animate-orbit-slow absolute bottom-16 right-12 h-28 w-28 rounded-full border-[10px] border-transparent border-r-sky-400 border-b-sky-400"></div>
-          <div class="animate-pulse-soft absolute left-7 top-24 h-3 w-3 rounded-full border border-slate-300 dark:border-slate-700"></div>
-          <div class="animate-pulse-soft absolute bottom-12 left-16 h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
-          <div class="soft-card animate-float flex h-56 w-56 items-center justify-center overflow-hidden rounded-full p-2 shadow-2xl shadow-sky-950/10 dark:shadow-sky-950/30 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80">
-            <picture class="h-full w-full">
-              <source
-                type="image/avif"
-                srcset="./assets/profile-pic-320.avif 320w, ./assets/profile-pic-640.avif 640w"
-                sizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
-              />
-              <source
-                type="image/webp"
-                srcset="./assets/profile-pic-320.webp 320w, ./assets/profile-pic-640.webp 640w"
-                sizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
-              />
-              <img
-                class="h-full w-full rounded-full object-cover"
-                src="./assets/profile-pic-640.jpg"
-                alt="Al Azher Al Kindi profile photo"
-                width="320"
-                height="320"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-              />
-            </picture>
+      <section id="about" class="about-section page-width" aria-labelledby="about-title">
+        <div class="about-card">
+          <div class="about-art" aria-hidden="true">
+            <img class="about-photo" src="./assets/about-portrait.png" alt="" width="1254" height="1254" loading="lazy" />
+          </div>
+          <div class="about-copy">
+            <h2 id="about-title" class="section-title section-title-left" data-i18n="about.title">About Me</h2>
+            <p data-i18n-html="about.body">I enjoy building software that solves <strong>real problems</strong>. What matters to me isn’t writing more code—it’s writing code that stays <strong>simple, reliable, and easy to understand.</strong> I’m currently focused on the <strong>.NET ecosystem,</strong> learning by building projects, making mistakes, and improving with every challenge. Every project I create teaches me something new, and that’s what keeps me moving forward.</p>
           </div>
         </div>
       </section>
 
-      <section id="about" class="section-shell reveal">
-        <div class="soft-panel grid items-center gap-8 p-6 sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:p-12">
-          <div class="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center">
-            <div class="absolute inset-6 rounded-full bg-sky-100 dark:bg-sky-950"></div>
-            <div class="absolute right-4 top-4 grid grid-cols-5 gap-2 opacity-45">
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-              <span class="h-1 w-1 rounded-full bg-sky-400"></span>
-            </div>
-            <div class="soft-card z-10 flex h-64 w-64 items-center justify-center overflow-hidden rounded-full p-2 shadow-xl shadow-sky-900/10 sm:h-72 sm:w-72">
-              <picture class="h-full w-full">
-                <source
-                  type="image/avif"
-                  srcset="./assets/about-pic-320.avif 320w, ./assets/about-pic-640.avif 640w"
-                  sizes="(min-width: 640px) 288px, 256px"
-                />
-                <source
-                  type="image/webp"
-                  srcset="./assets/about-pic-320.webp 320w, ./assets/about-pic-640.webp 640w"
-                  sizes="(min-width: 640px) 288px, 256px"
-                />
-                <img
-                  class="h-full w-full rounded-full object-cover"
-                  src="./assets/about-pic-640.jpg"
-                  alt="Al Azher Al Kindi portrait"
-                  width="288"
-                  height="288"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-            </div>
-          </div>
-
-          <div>
-            <h2 class="section-title text-left">About Me</h2>
-            <div class="mt-6 space-y-5 text-base leading-8 text-slate-600 dark:text-slate-300">
-              <p>
-                I enjoy building software that solves
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">real problems</strong>.
-                What matters to me isn't writing more code&mdash;it's writing code that stays
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">simple, reliable, and easy to understand</strong>.
-                I'm currently focused on the
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">.NET ecosystem</strong>, learning by
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">building projects</strong>, making mistakes, and
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">improving with every challenge</strong>.
-                Every project I create
-                <strong class="font-semibold text-slate-900 dark:text-slate-100">teaches me something new</strong>, and that's what keeps me moving forward.
-              </p>
-            </div>
-          </div>
+      <section id="skills" class="page-width section-spacing" aria-labelledby="skills-title">
+        <h2 id="skills-title" class="section-title decorated-title" data-i18n="skills.title">Skills</h2>
+        <p class="section-intro" data-i18n="skills.intro">Technologies and tools I work with to build modern and scalable applications.</p>
+        <div class="skills-grid">
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5-7 7 7 7m8-14 7 7-7 7m-2-16-4 20" /></svg></span><h3 data-i18n="skills.core">Core Technologies</h3><ul><li>C#</li><li>JavaScript</li><li>Dart</li><li>HTML</li><li>CSS</li></ul></article>
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5Zm-10 10 10 5 10-5M2 17l10 5 10-5" /></svg></span><h3 data-i18n="skills.frameworks">Frameworks &amp; Libraries</h3><ul><li>ASP.NET Core</li><li>Entity Framework Core</li><li>React</li><li>Angular</li><li>Blazor</li><li>.NET MAUI</li><li>Flutter</li></ul></article>
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3" /></svg></span><h3 data-i18n="skills.databases">Databases</h3><ul><li>SQL Server</li><li>MongoDB</li><li>Firebase</li></ul></article>
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h8" /></svg></span><h3 data-i18n="skills.backend">API &amp; Backend</h3><ul><li>RESTful APIs</li></ul></article>
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8.6 7.4 6.8 9.2M6 9v6" /></svg></span><h3 data-i18n="skills.tools">Tools &amp; Version Control</h3><ul><li>Git</li><li>GitHub</li></ul></article>
         </div>
       </section>
 
-      <section id="skills" class="section-shell">
-        <h2 class="section-title">Skills</h2>
-        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <article class="skill-card reveal">
-            <div class="skill-icon bg-sky-100 text-sky-600 dark:bg-sky-950 dark:text-sky-300">
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m16 18 6-6-6-6"></path>
-                <path d="m8 6-6 6 6 6"></path>
-                <path d="m14 4-4 16"></path>
-              </svg>
-            </div>
-            <h3 class="skill-title">Core Technologies</h3>
-            <ul class="skill-list">
-              <li>C#</li>
-              <li>JavaScript</li>
-              <li>Dart</li>
-              <li>HTML</li>
-              <li>CSS</li>
-            </ul>
+      <section id="projects" class="page-width section-spacing projects-section" aria-labelledby="projects-title">
+        <p class="section-kicker" data-i18n="projects.kicker">My Recent Work</p><h2 id="projects-title" class="section-title decorated-title" data-i18n="projects.title">Projects</h2>
+        <div class="projects-grid">
+          <article class="project-card" data-project-id="project-one" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project One" data-i18n-aria="project.card.one">
+            <img class="project-image" src="./assets/images/project-dashboard-placeholder.svg" alt="Analytics dashboard illustration" data-i18n-alt="project.image.one" loading="lazy" />
+            <h3>Project One</h3><p data-i18n="project.one.card">A dashboard web application for analytics and data visualization.</p>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
           </article>
-
-          <article class="skill-card reveal reveal-delay-1">
-            <div class="skill-icon bg-indigo-100 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m12 2 9 5-9 5-9-5 9-5Z"></path>
-                <path d="m3 12 9 5 9-5"></path>
-                <path d="m3 17 9 5 9-5"></path>
-              </svg>
-            </div>
-            <h3 class="skill-title">Frameworks & Libraries</h3>
-            <ul class="skill-list">
-              <li>ASP.NET Core</li>
-              <li>Entity Framework Core</li>
-              <li>React</li>
-              <li>Angular</li>
-              <li>Blazor</li>
-              <li>.NET MAUI</li>
-              <li>Flutter</li>
-            </ul>
+          <article class="project-card" data-project-id="project-two" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project Two" data-i18n-aria="project.card.two">
+            <img class="project-image" src="./assets/images/project-mobile-placeholder.svg" alt="Mobile productivity app illustration" data-i18n-alt="project.image.two" loading="lazy" />
+            <h3>Project Two</h3><p data-i18n="project.two.card">A cross-platform mobile app for task management and productivity.</p>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
           </article>
-
-          <article class="skill-card reveal reveal-delay-2">
-            <div class="skill-icon bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-300">
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <ellipse cx="12" cy="5" rx="8" ry="3"></ellipse>
-                <path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"></path>
-                <path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"></path>
-              </svg>
-            </div>
-            <h3 class="skill-title">Databases</h3>
-            <ul class="skill-list">
-              <li>SQL Server</li>
-              <li>MongoDB</li>
-              <li>Firebase</li>
-            </ul>
-          </article>
-
-          <article class="skill-card reveal lg:col-span-1">
-            <div class="skill-icon bg-orange-100 text-orange-600 dark:bg-orange-950 dark:text-orange-300">
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M7 8h10"></path>
-                <path d="M7 12h10"></path>
-                <path d="M7 16h10"></path>
-                <rect x="4" y="3" width="16" height="18" rx="3"></rect>
-              </svg>
-            </div>
-            <h3 class="skill-title">API & Backend</h3>
-            <ul class="skill-list">
-              <li>RESTful APIs</li>
-            </ul>
-          </article>
-
-          <article class="skill-card reveal reveal-delay-1 md:col-span-1 lg:col-span-2">
-            <div class="skill-icon bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
-              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="18" cy="18" r="3"></circle>
-                <circle cx="6" cy="6" r="3"></circle>
-                <circle cx="6" cy="18" r="3"></circle>
-                <path d="M8.6 7.4 15.4 16.6"></path>
-                <path d="M6 9v6"></path>
-              </svg>
-            </div>
-            <h3 class="skill-title">Tools & Version Control</h3>
-            <ul class="skill-list">
-              <li>Git</li>
-              <li>GitHub</li>
-            </ul>
+          <article class="project-card" data-project-id="project-three" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project Three" data-i18n-aria="project.card.three">
+            <img class="project-image" src="./assets/images/project-commerce-placeholder.svg" alt="Online shop illustration" data-i18n-alt="project.image.three" loading="lazy" />
+            <h3>Project Three</h3><p data-i18n="project.three.card">An e-commerce platform with secure payments and order tracking.</p>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
           </article>
         </div>
       </section>
 
-      <section id="projects" class="section-shell">
-        <p class="text-center text-sm font-medium text-slate-500 dark:text-slate-400">
-          My Recent Work
-        </p>
-        <h2 class="section-title mt-2">Projects</h2>
-
-        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <article
-            class="project-card reveal cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-cyan-300 dark:focus:ring-offset-slate-950"
-            data-project-id="project-one"
-            aria-haspopup="dialog"
-            aria-controls="project-modal"
-            tabindex="0"
-            aria-label="Open details for Project One"
-          >
-            <img
-              class="project-image"
-              src="./assets/images/project-dashboard-placeholder.svg"
-              alt="Dashboard project placeholder"
-              loading="lazy"
-            />
-            <h3 class="mt-6 text-xl font-bold text-slate-950 dark:text-white">Project One</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-              A dashboard web application for analytics and data visualization.
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a class="project-button" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-                </svg>
-                GitHub
-              </a>
-              <a class="project-button" href="#" aria-label="Open live demo for Project One">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M15 3h6v6"></path>
-                  <path d="M10 14 21 3"></path>
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                </svg>
-                Live Demo
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal reveal-delay-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-cyan-300 dark:focus:ring-offset-slate-950"
-            data-project-id="project-two"
-            aria-haspopup="dialog"
-            aria-controls="project-modal"
-            tabindex="0"
-            aria-label="Open details for Project Two"
-          >
-            <img
-              class="project-image"
-              src="./assets/images/project-mobile-placeholder.svg"
-              alt="Mobile app project placeholder"
-              loading="lazy"
-            />
-            <h3 class="mt-6 text-xl font-bold text-slate-950 dark:text-white">Project Two</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-              A cross-platform mobile app for task management and productivity.
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a class="project-button" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-                </svg>
-                GitHub
-              </a>
-              <a class="project-button" href="#" aria-label="Open live demo for Project Two">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M15 3h6v6"></path>
-                  <path d="M10 14 21 3"></path>
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                </svg>
-                Live Demo
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal reveal-delay-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-cyan-300 dark:focus:ring-offset-slate-950"
-            data-project-id="project-three"
-            aria-haspopup="dialog"
-            aria-controls="project-modal"
-            tabindex="0"
-            aria-label="Open details for Project Three"
-          >
-            <img
-              class="project-image"
-              src="./assets/images/project-commerce-placeholder.svg"
-              alt="E-commerce project placeholder"
-              loading="lazy"
-            />
-            <h3 class="mt-6 text-xl font-bold text-slate-950 dark:text-white">Project Three</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-              An e-commerce platform with secure payments and order tracking.
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a class="project-button" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-                </svg>
-                GitHub
-              </a>
-              <a class="project-button" href="#" aria-label="Open live demo for Project Three">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M15 3h6v6"></path>
-                  <path d="M10 14 21 3"></path>
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                </svg>
-                Live Demo
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="mx-auto max-w-6xl px-4 py-10 pb-20 sm:px-6 lg:px-8">
-        <div class="soft-panel reveal mx-auto px-3 py-12 text-center shadow-2xl shadow-slate-900/[0.055] min-[375px]:px-4 sm:px-10 sm:py-16 lg:px-16">
-          <h2 class="text-center text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">Contact Me</h2>
-          <p class="mx-auto mt-3 max-w-xl text-center text-sm leading-6 text-slate-600 dark:text-slate-300 sm:text-base">
-            I'd love to hear from you. Let's connect.
-          </p>
-          <div class="mt-8 flex justify-center sm:mt-9">
-            <div class="grid w-full max-w-[340px] grid-cols-[minmax(0,1fr)_1px_2.5rem_1px_2.5rem] overflow-hidden rounded-full border border-slate-200 bg-white/85 shadow-xl shadow-slate-900/[0.06] backdrop-blur min-[375px]:grid-cols-[minmax(0,1fr)_1px_3.5rem_1px_3.5rem] min-[560px]:max-w-xl min-[560px]:grid-cols-[minmax(0,1fr)_1px_4rem_1px_4rem] dark:border-slate-700 dark:bg-slate-950/60 dark:shadow-black/25">
-              <div class="flex min-h-14 min-w-0 items-center justify-center gap-2 px-3 text-[11px] font-semibold text-slate-800 min-[360px]:text-sm min-[560px]:justify-start min-[560px]:gap-3 min-[560px]:px-7 dark:text-slate-100">
-                <a
-                  class="shrink-0 text-slate-700 transition hover:text-sky-600 dark:text-slate-200 dark:hover:text-cyan-300"
-                  href="mailto:azherkindi@gmail.com"
-                  aria-label="Send an email to azherkindi@gmail.com"
-                >
-                  <svg class="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                    <path d="m3 7 9 6 9-6"></path>
-                  </svg>
-                </a>
-                <span class="min-w-0 cursor-text select-text whitespace-nowrap text-center min-[560px]:text-left">azherkindi@gmail.com</span>
-              </div>
-              <div class="bg-slate-200 dark:bg-slate-700"></div>
-              <a
-                class="grid min-h-14 place-items-center text-slate-950 transition hover:bg-slate-50 hover:text-sky-600 dark:text-white dark:hover:bg-slate-900 dark:hover:text-cyan-300"
-                href="https://github.com/azher-devs"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-              >
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-                </svg>
-              </a>
-              <div class="bg-slate-200 dark:bg-slate-700"></div>
-              <a
-                class="grid min-h-14 place-items-center text-slate-950 transition hover:bg-slate-50 hover:text-sky-600 dark:text-white dark:hover:bg-slate-900 dark:hover:text-cyan-300"
-                href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.34 8h4.31v14H.34V8Zm7.04 0h4.13v1.91h.06c.58-1.09 1.98-2.24 4.08-2.24 4.36 0 5.17 2.87 5.17 6.61V22h-4.3v-6.84c0-1.63-.03-3.73-2.27-3.73-2.28 0-2.63 1.78-2.63 3.61V22H7.38V8Z"></path>
-                </svg>
-              </a>
-            </div>
+      <section id="contact" class="contact-section" aria-labelledby="contact-title">
+        <span class="dot-grid contact-dots" aria-hidden="true"></span><span class="accent-strokes contact-strokes" aria-hidden="true"></span>
+        <div class="page-width contact-inner"><h2 id="contact-title" class="section-title decorated-title" data-i18n="contact.title">Contact Me</h2>
+          <p class="contact-subtitle" data-i18n="contact.subtitle">I’d love to hear from you. Let’s connect.</p>
+          <div class="contact-bar">
+            <a class="email-link" href="mailto:azherkindi@gmail.com"><span class="email-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg></span><span>azherkindi@gmail.com</span></a>
+            <a class="contact-social" href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99c0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg></a>
+            <a class="contact-social linkedin-mark" href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="Visit LinkedIn profile" data-i18n-aria="social.linkedin" data-i18n-title="social.linkedinTitle">in</a>
           </div>
         </div>
       </section>
     </main>
 
-    <div
-      id="project-modal"
-      class="fixed bottom-0 left-0 right-0 top-0 z-[60] hidden items-center justify-center px-4 py-6 sm:px-6"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="project-modal-title"
-      aria-hidden="true"
-    >
-      <div class="absolute bottom-0 left-0 right-0 top-0 bg-slate-950/70 backdrop-blur-sm" data-modal-overlay></div>
+    <footer class="site-footer"><nav aria-label="Footer navigation" data-i18n-aria="footerNavigation"><a href="#about" data-i18n="nav.about">About</a><a href="#skills" data-i18n="nav.skills">Skills</a><a href="#projects" data-i18n="nav.projects">Projects</a><a href="#contact" data-i18n="nav.contact">Contact</a></nav><p>© 2027 Al Azher Al Kindi</p></footer>
 
-      <div class="soft-panel relative z-10 max-h-[88vh] w-full max-w-3xl overflow-hidden shadow-2xl shadow-slate-950/20">
-        <button
-          id="project-modal-close"
-          type="button"
-          class="icon-button absolute right-4 top-4 z-20"
-          aria-label="Close project details"
-        >
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            aria-hidden="true"
-          >
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
-          </svg>
-        </button>
-
-        <div class="max-h-[88vh] overflow-y-auto p-5 sm:p-6">
-          <img
-            id="project-modal-image"
-            class="h-48 w-full rounded-2xl border border-slate-200 bg-slate-50 object-cover dark:border-slate-800 dark:bg-slate-950 sm:h-64"
-            src="./assets/images/project-dashboard-placeholder.svg"
-            alt=""
-          />
-
-          <div class="mt-6 pr-12">
-            <p class="text-sm font-medium text-sky-600 dark:text-cyan-300">Project Details</p>
-            <h3 id="project-modal-title" class="mt-2 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
-              Project title
-            </h3>
-          </div>
-
-          <p id="project-modal-description" class="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300"></p>
-
-          <div class="mt-6 grid gap-6 md:grid-cols-2">
-            <div>
-              <h4 class="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                Technologies
-              </h4>
-              <div id="project-modal-technologies" class="mt-3 flex flex-wrap gap-2"></div>
-            </div>
-
-            <div>
-              <h4 class="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                Key Features
-              </h4>
-              <ul id="project-modal-features" class="mt-3 space-y-2 text-sm leading-6 text-slate-600 dark:text-slate-300"></ul>
-            </div>
-          </div>
-
-          <div class="mt-8 flex flex-col gap-3 min-[380px]:flex-row">
-            <a id="project-modal-github" class="project-button w-full min-[380px]:w-auto" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.03c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.18a10.84 10.84 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.42.36.79 1.07.79 2.16v3.04c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-              </svg>
-              GitHub
-            </a>
-            <a id="project-modal-live" class="project-button w-full min-[380px]:w-auto" href="#" target="_blank" rel="noreferrer">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M15 3h6v6"></path>
-                <path d="M10 14 21 3"></path>
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              </svg>
-              Live Demo
-            </a>
-          </div>
-        </div>
+    <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-hidden="true" hidden>
+      <div class="modal-panel"><button id="project-modal-close" class="modal-close" type="button" aria-label="Close project details" data-i18n-aria="modal.close">×</button>
+        <img id="project-modal-image" class="modal-image" src="./assets/images/project-dashboard-placeholder.svg" alt="" />
+        <div class="modal-heading"><p data-i18n="modal.title">Project Details</p><h3 id="project-modal-title" data-i18n="modal.projectTitlePlaceholder">Project title</h3></div>
+        <p id="project-modal-description" class="modal-description"></p>
+        <div class="modal-details"><div><h4 data-i18n="modal.technologies">Technologies</h4><div id="project-modal-technologies" class="modal-tags"></div></div><div><h4 data-i18n="modal.features">Key Features</h4><ul id="project-modal-features"></ul></div></div>
+        <div class="modal-actions"><a id="project-modal-github" class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">GitHub</a><span id="project-modal-live" class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveUnavailable">Live demo unavailable</span></div>
       </div>
     </div>
 
-    <footer class="border-t border-slate-200 bg-white/80 px-5 pb-24 pt-8 dark:border-slate-800 dark:bg-slate-950/80 sm:pb-8">
-      <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center text-sm text-slate-500 dark:text-slate-400">
-        <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-medium text-slate-700 dark:text-slate-300 sm:gap-6" aria-label="Footer navigation">
-          <a class="footer-link" href="#about">About</a>
-          <a class="footer-link" href="#skills">Skills</a>
-          <a class="footer-link" href="#projects">Projects</a>
-          <a class="footer-link" href="#contact">Contact</a>
-        </nav>
-        <p class="max-w-xs leading-6 sm:max-w-none">&copy; 2026 Al Azher Al Kindi.</p>
-      </div>
-    </footer>
-
-    <button
-      id="back-to-top"
-      type="button"
-      class="scroll-progress"
-      aria-label="Back to top"
-    >
-      <span>
-        <svg
-          class="h-5 w-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="m18 15-6-6-6 6"></path>
-        </svg>
-      </span>
-    </button>
-
-    <script src="./src/main.js?v=20260719"></script>
+    <script src="./src/translations.js?v=portfolio-localization"></script>
+    <script src="./src/main.js?v=portfolio-localization"></script>
   </body>
 </html>

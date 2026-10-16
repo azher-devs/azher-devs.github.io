@@ -51,7 +51,7 @@ npm run watch:css
 
 All production links use relative paths, so the portfolio works from a GitHub Pages project URL such as `https://username.github.io/repository-name/`.
 
-The responsive AVIF, WebP, and optimized JPEG photos in `assets/` are the production image files used by the site.
+The supplied Hero and About portraits in `assets/` are the production image files used by the redesign.
 
 ## Customization
 

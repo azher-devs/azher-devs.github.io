@@ -1,7 +1,7 @@
-const root = document.documentElement;
-const themeToggle = document.querySelector("#theme-toggle");
 const menuToggle = document.querySelector("#menu-toggle");
 const mobileMenu = document.querySelector("#mobile-menu");
+const languageToggle = document.querySelector("#language-toggle");
+const languageToggleLabel = document.querySelector("#language-toggle-label");
 const backToTopButton = document.querySelector("#back-to-top");
 const revealElements = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -15,6 +15,8 @@ const projectModalTechnologies = document.querySelector("#project-modal-technolo
 const projectModalFeatures = document.querySelector("#project-modal-features");
 const projectModalGithub = document.querySelector("#project-modal-github");
 const projectModalLive = document.querySelector("#project-modal-live");
+const pageDescription = document.querySelector('meta[name="description"]');
+const localeCatalog = window.portfolioTranslations;
 const lockedBodyStyles = {};
 const projects = [
   {
@@ -31,7 +33,6 @@ const projects = [
     ],
     image: "./assets/images/project-dashboard-placeholder.svg",
     githubUrl: "https://github.com/azher-devs",
-    liveDemoUrl: "#",
   },
   {
     id: "project-two",
@@ -47,7 +48,6 @@ const projects = [
     ],
     image: "./assets/images/project-mobile-placeholder.svg",
     githubUrl: "https://github.com/azher-devs",
-    liveDemoUrl: "#",
   },
   {
     id: "project-three",
@@ -63,22 +63,82 @@ const projects = [
     ],
     image: "./assets/images/project-commerce-placeholder.svg",
     githubUrl: "https://github.com/azher-devs",
-    liveDemoUrl: "#",
   },
 ];
 let lastFocusedElement = null;
 let lockedScrollY = 0;
+let activeProjectId = null;
+
+function getSavedLanguage() {
+  try {
+    const savedLanguage = window.localStorage.getItem("portfolio-language");
+    return savedLanguage === "ar" ? "ar" : "en";
+  } catch {
+    return "en";
+  }
+}
+
+let currentLanguage = getSavedLanguage();
+
+function translate(key) {
+  return localeCatalog[currentLanguage].strings[key] || key;
+}
+
+function applyLanguage(language, persist = true) {
+  currentLanguage = language === "ar" ? "ar" : "en";
+  const { strings } = localeCatalog[currentLanguage];
+  const switchLanguageKey = currentLanguage === "en" ? "language.switchToArabic" : "language.switchToEnglish";
+
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dir = currentLanguage === "ar" ? "rtl" : "ltr";
+  document.title = strings.pageTitle;
+  if (pageDescription) pageDescription.content = strings.metaDescription;
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = translate(element.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+    element.innerHTML = translate(element.dataset.i18nHtml);
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+    element.setAttribute("aria-label", translate(element.dataset.i18nAria));
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+    element.title = translate(element.dataset.i18nTitle);
+  });
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    element.alt = translate(element.dataset.i18nAlt);
+  });
+
+  if (languageToggleLabel) {
+    languageToggleLabel.textContent = localeCatalog[currentLanguage].languageOption;
+    languageToggleLabel.lang = currentLanguage === "en" ? "ar" : "en";
+  }
+  languageToggle?.setAttribute("aria-label", translate(switchLanguageKey));
+  menuToggle?.setAttribute("aria-label", translate(menuToggle.getAttribute("aria-expanded") === "true" ? "menu.close" : "menu.open"));
+
+  document.querySelectorAll(".project-button-unavailable").forEach((element) => {
+    element.textContent = translate(element.id === "project-modal-live" ? "projects.liveUnavailable" : "projects.liveDemo");
+  });
+
+  if (activeProjectId && projectModal && !projectModal.hidden) {
+    const activeProject = projects.find((project) => project.id === activeProjectId);
+    if (activeProject) renderProjectDetails(activeProject);
+  }
+
+  if (persist) {
+    try {
+      window.localStorage.setItem("portfolio-language", currentLanguage);
+    } catch {
+      // The language still applies for this visit when storage is unavailable.
+    }
+  }
+}
 
 function resetHorizontalScroll() {
   if (window.scrollX !== 0) {
     window.scrollTo(0, window.scrollY);
   }
-}
-
-function setTheme(theme) {
-  const isDark = theme === "dark";
-  root.classList.toggle("dark", isDark);
-  localStorage.setItem("theme", theme);
 }
 
 function lockBackgroundScroll() {
@@ -94,7 +154,7 @@ function lockBackgroundScroll() {
 
   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-  root.classList.add("overflow-hidden");
+  document.documentElement.classList.add("overflow-hidden");
   document.body.classList.add("overflow-hidden");
   document.body.style.position = "fixed";
   document.body.style.top = `-${lockedScrollY}px`;
@@ -112,7 +172,7 @@ function lockBackgroundScroll() {
 function unlockBackgroundScroll() {
   if (document.body.dataset.scrollLocked !== "true") return;
 
-  root.classList.remove("overflow-hidden");
+  document.documentElement.classList.remove("overflow-hidden");
   document.body.classList.remove("overflow-hidden");
   document.body.style.position = lockedBodyStyles.position || "";
   document.body.style.top = lockedBodyStyles.top || "";
@@ -126,10 +186,10 @@ function unlockBackgroundScroll() {
 }
 
 function restoreLockedScrollPosition() {
-  const previousScrollBehavior = root.style.scrollBehavior;
-  root.style.scrollBehavior = "auto";
+  const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = "auto";
   window.scrollTo(0, lockedScrollY);
-  root.style.scrollBehavior = previousScrollBehavior;
+  document.documentElement.style.scrollBehavior = previousScrollBehavior;
   updateScrollProgress();
 }
 
@@ -146,8 +206,7 @@ function restoreLastFocus() {
 }
 
 function setModalOpen(isOpen) {
-  projectModal?.classList.toggle("hidden", !isOpen);
-  projectModal?.classList.toggle("flex", isOpen);
+  if (projectModal) projectModal.hidden = !isOpen;
   projectModal?.setAttribute("aria-hidden", String(!isOpen));
 
   if (isOpen) {
@@ -158,27 +217,31 @@ function setModalOpen(isOpen) {
 }
 
 function renderProjectDetails(project) {
+  const localizedProject = localeCatalog[currentLanguage].projects[project.id];
   projectModalImage.src = project.image;
-  projectModalImage.alt = `${project.title} preview`;
+  projectModalImage.alt = `${project.title} ${translate("modal.projectPreview")}`;
   projectModalTitle.textContent = project.title;
-  projectModalDescription.textContent = project.description;
+  projectModalDescription.textContent = localizedProject.description;
   projectModalGithub.href = project.githubUrl;
-  projectModalLive.href = project.liveDemoUrl;
+  projectModalGithub.setAttribute("aria-label", translate("social.github"));
+  projectModalLive.textContent = translate("projects.liveUnavailable");
+  projectModalLive.setAttribute("aria-disabled", "true");
 
   projectModalTechnologies.replaceChildren(
     ...project.technologies.map((technology) => {
       const tag = document.createElement("span");
       tag.className =
-        "rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300";
+        "rounded-full bg-teal-50 px-3 py-1 text-sm font-medium text-slate-700";
+      tag.dir = "ltr";
       tag.textContent = technology;
       return tag;
     })
   );
 
   projectModalFeatures.replaceChildren(
-    ...project.features.map((feature) => {
+    ...localizedProject.features.map((feature) => {
       const item = document.createElement("li");
-      item.className = "relative pl-5 before:absolute before:left-0 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-sky-500 before:content-[''] dark:before:bg-cyan-300";
+      item.className = "modal-feature";
       item.textContent = feature;
       return item;
     })
@@ -190,6 +253,7 @@ function openProjectModal(projectId) {
 
   if (!project || !projectModal) return;
 
+  activeProjectId = projectId;
   lastFocusedElement = document.activeElement;
   renderProjectDetails(project);
   setModalOpen(true);
@@ -197,25 +261,28 @@ function openProjectModal(projectId) {
 }
 
 function closeProjectModal() {
-  if (!projectModal || projectModal.classList.contains("hidden")) return;
+  if (!projectModal || projectModal.hidden) return;
 
   setModalOpen(false);
   restoreLastFocus();
 }
 
-themeToggle?.addEventListener("click", () => {
-  setTheme(root.classList.contains("dark") ? "light" : "dark");
+menuToggle?.addEventListener("click", () => {
+  const isOpen = mobileMenu.hidden;
+  mobileMenu.hidden = !isOpen;
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", translate(isOpen ? "menu.close" : "menu.open"));
 });
 
-menuToggle?.addEventListener("click", () => {
-  const isOpen = mobileMenu.classList.toggle("hidden") === false;
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
+languageToggle?.addEventListener("click", () => {
+  applyLanguage(currentLanguage === "en" ? "ar" : "en");
 });
 
 document.querySelectorAll("#mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
+    mobileMenu.hidden = true;
     menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", translate("menu.open"));
   });
 });
 
@@ -272,6 +339,7 @@ window.addEventListener("resize", () => {
   updateScrollProgress();
 });
 window.addEventListener("load", resetHorizontalScroll);
+applyLanguage(currentLanguage, false);
 updateScrollProgress();
 
 function showRevealElement(element) {
