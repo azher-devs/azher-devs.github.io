@@ -126,13 +126,13 @@
   }
 
   .soft-panel {
-    @apply rounded-[2rem] border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-900/[0.04] backdrop-blur dark:border-slate-800 dark:bg-slate-900/55 dark:shadow-black/20;
+    @apply rounded-[2rem] border border-slate-200/80 bg-white/80 shadow-xl shadow-slate-900/[0.04] dark:border-slate-800 dark:bg-slate-900/55 dark:shadow-black/20;
   }
 
   .soft-card,
   .skill-card,
   .project-card {
-    @apply border border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70;
+    @apply border border-slate-200/80 bg-white/90 dark:border-slate-800 dark:bg-slate-900/70;
   }
 
   .skill-card {

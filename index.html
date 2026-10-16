@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A clean personal portfolio for a .NET Software Developer."
+      content="Al Azher Al Kindi's portfolio showcasing .NET software development skills and projects."
     />
-    <title>Al Azher Al Kindi | .NET Software Developer</title>
+    <title>Al Azher | Portfolio</title>
     <script>
       document.documentElement.classList.add("js");
 
@@ -20,7 +20,16 @@
         localStorage.setItem("theme", "light");
       }
     </script>
-    <link rel="stylesheet" href="./dist/output.css?v=project-modal" />
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/profile-pic-640.avif"
+      imagesrcset="./assets/profile-pic-320.avif 320w, ./assets/profile-pic-640.avif 640w"
+      imagesizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
+      type="image/avif"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="./dist/output.css?v=20260719" />
   </head>
   <body
     class="w-full overflow-x-hidden bg-slate-50 text-slate-950 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100"
@@ -36,7 +45,7 @@
         class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
         aria-label="Primary navigation"
       >
-        <a href="#home" class="text-lg font-bold tracking-tight">Al Azher Al Kindi</a>
+        <a href="#home" class="text-lg font-bold tracking-tight">&lt;Azher /&gt;</a>
 
         <div class="hidden items-center gap-8 md:flex">
           <a class="nav-link" href="#about">About</a>
@@ -184,14 +193,28 @@
           <div class="animate-pulse-soft absolute left-7 top-24 h-3 w-3 rounded-full border border-slate-300 dark:border-slate-700"></div>
           <div class="animate-pulse-soft absolute bottom-12 left-16 h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
           <div class="soft-card animate-float flex h-56 w-56 items-center justify-center overflow-hidden rounded-full p-2 shadow-2xl shadow-sky-950/10 dark:shadow-sky-950/30 sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80">
-            <img
-              class="h-full w-full rounded-full object-cover"
-              src="./assets/profile-pic.jpg"
-              alt="Al Azher Al Kindi profile photo"
-              width="320"
-              height="320"
-              fetchpriority="high"
-            />
+            <picture class="h-full w-full">
+              <source
+                type="image/avif"
+                srcset="./assets/profile-pic-320.avif 320w, ./assets/profile-pic-640.avif 640w"
+                sizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
+              />
+              <source
+                type="image/webp"
+                srcset="./assets/profile-pic-320.webp 320w, ./assets/profile-pic-640.webp 640w"
+                sizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, (min-width: 640px) 256px, 224px"
+              />
+              <img
+                class="h-full w-full rounded-full object-cover"
+                src="./assets/profile-pic-640.jpg"
+                alt="Al Azher Al Kindi profile photo"
+                width="320"
+                height="320"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </picture>
           </div>
         </div>
       </section>
@@ -213,14 +236,27 @@
               <span class="h-1 w-1 rounded-full bg-sky-400"></span>
             </div>
             <div class="soft-card z-10 flex h-64 w-64 items-center justify-center overflow-hidden rounded-full p-2 shadow-xl shadow-sky-900/10 sm:h-72 sm:w-72">
-              <img
-                class="h-full w-full rounded-full object-cover"
-                src="./assets/about-pic.jpg"
-                alt="Al Azher Al Kindi portrait"
-                width="288"
-                height="288"
-                loading="lazy"
-              />
+              <picture class="h-full w-full">
+                <source
+                  type="image/avif"
+                  srcset="./assets/about-pic-320.avif 320w, ./assets/about-pic-640.avif 640w"
+                  sizes="(min-width: 640px) 288px, 256px"
+                />
+                <source
+                  type="image/webp"
+                  srcset="./assets/about-pic-320.webp 320w, ./assets/about-pic-640.webp 640w"
+                  sizes="(min-width: 640px) 288px, 256px"
+                />
+                <img
+                  class="h-full w-full rounded-full object-cover"
+                  src="./assets/about-pic-640.jpg"
+                  alt="Al Azher Al Kindi portrait"
+                  width="288"
+                  height="288"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
           </div>
 
@@ -621,6 +657,6 @@
       </span>
     </button>
 
-    <script src="./src/main.js?v=personal-links-1"></script>
+    <script src="./src/main.js?v=20260719"></script>
   </body>
 </html>
