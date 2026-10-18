@@ -24,33 +24,53 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
         </button>
       </nav>
-      <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" data-i18n-aria="mobileNavigation" hidden>
-        <a href="#about" data-i18n="nav.about">About</a><a href="#skills" data-i18n="nav.skills">Skills</a><a href="#projects" data-i18n="nav.projects">Projects</a><a href="#contact" data-i18n="nav.contact">Contact</a>
-      </nav>
     </header>
+
+    <div id="mobile-menu" class="mobile-menu-shell" hidden aria-hidden="true">
+      <button class="mobile-menu-overlay" type="button" aria-label="Close menu" data-i18n-aria="menu.close" tabindex="-1"></button>
+      <aside class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" data-i18n-aria="mobileNavigation" tabindex="-1">
+        <div class="mobile-menu-header">
+          <a class="wordmark" href="#home" data-menu-close>&lt;Azher /&gt;</a>
+          <button id="mobile-menu-close" class="mobile-menu-close" type="button" aria-label="Close menu" data-i18n-aria="menu.close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+        </div>
+        <nav class="mobile-menu-links" aria-label="Mobile navigation links" data-i18n-aria="mobileNavigation">
+          <a href="#home" data-menu-link aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z" /></svg><span data-i18n="nav.home">Home</span><svg class="menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></a>
+          <a href="#about" data-menu-link><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2H4Z" /></svg><span data-i18n="nav.about">About</span><svg class="menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></a>
+          <a href="#skills" data-menu-link><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8l10-5Zm-10 9 10 5 10-5M2 16l10 5 10-5" /></svg><span data-i18n="nav.skills">Skills</span><svg class="menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></a>
+          <a href="#projects" data-menu-link><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" /><path d="M3 9h18" /></svg><span data-i18n="nav.projects">Projects</span><svg class="menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></a>
+          <a href="#contact" data-menu-link><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7" /></svg><span data-i18n="nav.contact">Contact</span><svg class="menu-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg></a>
+        </nav>
+        <div class="drawer-language" role="group" aria-label="Language selection" data-i18n-aria="language.select">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.7 12h18.6M12 2.5a15 15 0 0 1 0 19M12 2.5a15 15 0 0 0 0 19" /></svg>
+          <button type="button" lang="en" data-language-choice="en" aria-pressed="true">EN</button>
+          <span class="drawer-language-divider" aria-hidden="true"></span>
+          <button type="button" lang="ar" data-language-choice="ar" aria-pressed="false">عربي</button>
+        </div>
+      </aside>
+    </div>
 
     <main id="home">
       <section class="hero page-width" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="hero-greeting" data-i18n="hero.greeting">Hello, I’m</p>
-          <h1 id="hero-title" data-i18n-html="hero.name">Al Azher <span>Al Kindi</span></h1>
-          <p class="hero-role" data-i18n-html="hero.role">.NET Software Developer</p>
-          <p class="hero-summary" data-i18n="hero.summary">Building practical and reliable applications.</p>
-          <div class="hero-actions">
+          <p class="hero-greeting hero-entrance hero-delay-1" data-i18n="hero.greeting">Hello, I’m</p>
+          <h1 id="hero-title" class="hero-entrance hero-delay-2" data-i18n-html="hero.name"><span>Al Azher</span> Al Kindi</h1>
+          <p class="hero-role hero-entrance hero-delay-3" data-i18n-html="hero.role">.NET Software Developer</p>
+          <p class="hero-summary hero-entrance hero-delay-4" data-i18n="hero.summary">Building practical and reliable applications.</p>
+          <div class="hero-actions hero-entrance hero-delay-5">
             <a class="button button-primary" href="#projects"><span data-i18n="hero.projects">View Projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg></a>
             <a class="button button-outline" href="#contact" data-i18n="hero.contact">Contact Me</a>
           </div>
-          <div class="social-links" aria-label="Social links" data-i18n-aria="socialLinks">
+          <div class="social-links hero-entrance hero-delay-6" aria-label="Social links" data-i18n-aria="socialLinks">
             <a href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>
             </a>
             <a href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="Visit LinkedIn profile" data-i18n-aria="social.linkedin" data-i18n-title="social.linkedinTitle"><span class="linkedin-mark">in</span></a>
           </div>
         </div>
-        <div class="hero-art"><img src="./assets/hero-portrait.png" alt="Al Azher Al Kindi in traditional Omani dress" data-i18n-alt="hero.portrait" width="1536" height="1024" fetchpriority="high" /></div>
+        <div class="hero-art hero-entrance hero-delay-3"><img src="./assets/hero-portrait.png" alt="Al Azher Al Kindi in traditional Omani dress" data-i18n-alt="hero.portrait" width="1536" height="1024" fetchpriority="high" /></div>
       </section>
 
-      <section id="about" class="about-section page-width" aria-labelledby="about-title">
+      <section id="about" class="about-section page-width reveal" aria-labelledby="about-title">
         <div class="about-card">
           <div class="about-art" aria-hidden="true">
             <img class="about-photo" src="./assets/about-portrait.png" alt="" width="1254" height="1254" loading="lazy" />
@@ -62,7 +82,7 @@
         </div>
       </section>
 
-      <section id="skills" class="page-width section-spacing" aria-labelledby="skills-title">
+      <section id="skills" class="page-width section-spacing reveal" aria-labelledby="skills-title">
         <h2 id="skills-title" class="section-title decorated-title" data-i18n="skills.title">Skills</h2>
         <p class="section-intro" data-i18n="skills.intro">Technologies and tools I work with to build modern and scalable applications.</p>
         <div class="skills-grid">
@@ -71,36 +91,37 @@
           <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3" /></svg></span><h3 data-i18n="skills.databases">Databases</h3><ul><li>SQL Server</li><li>MongoDB</li><li>Firebase</li></ul></article>
           <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h8" /></svg></span><h3 data-i18n="skills.backend">API &amp; Backend</h3><ul><li>RESTful APIs</li></ul></article>
           <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8.6 7.4 6.8 9.2M6 9v6" /></svg></span><h3 data-i18n="skills.tools">Tools &amp; Version Control</h3><ul><li>Git</li><li>GitHub</li></ul></article>
+          <article class="skill-card"><span class="skill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2Z"/><path d="m19 14 .8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"/><circle cx="5" cy="18" r="2"/></svg></span><h3 data-i18n="skills.aiTools">AI Development Tools</h3><ul><li>OpenAI Codex</li><li>Cursor</li><li>Google Antigravity</li></ul></article>
         </div>
       </section>
 
-      <section id="projects" class="page-width section-spacing projects-section" aria-labelledby="projects-title">
+      <section id="projects" class="page-width section-spacing projects-section reveal" aria-labelledby="projects-title">
         <p class="section-kicker" data-i18n="projects.kicker">My Recent Work</p><h2 id="projects-title" class="section-title decorated-title" data-i18n="projects.title">Projects</h2>
         <div class="projects-grid">
-          <article class="project-card" data-project-id="project-one" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project One" data-i18n-aria="project.card.one">
-            <img class="project-image" src="./assets/images/project-dashboard-placeholder.svg" alt="Analytics dashboard illustration" data-i18n-alt="project.image.one" loading="lazy" />
-            <h3>Project One</h3><p data-i18n="project.one.card">A dashboard web application for analytics and data visualization.</p>
-            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
+          <article class="project-card" data-project-id="project-one" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Student Management System" data-i18n-aria="project.card.one">
+            <img class="project-image" src="./assets/images/student-management-system-dashboard.png" alt="Student Management System dashboard screenshot" data-i18n-alt="project.image.one" loading="lazy" />
+            <h3 data-i18n="project.one.title">Student Management System</h3><p data-i18n="project.one.card">A Windows desktop application for managing student records, course grades, and average grades, with local Excel data storage.</p>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs/Student-Management-System" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><button class="project-button project-button-details" type="button" data-project-details data-i18n="projects.viewDetails">View Details</button></div>
           </article>
           <article class="project-card" data-project-id="project-two" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project Two" data-i18n-aria="project.card.two">
             <img class="project-image" src="./assets/images/project-mobile-placeholder.svg" alt="Mobile productivity app illustration" data-i18n-alt="project.image.two" loading="lazy" />
             <h3>Project Two</h3><p data-i18n="project.two.card">A cross-platform mobile app for task management and productivity.</p>
-            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><button class="project-button project-button-details" type="button" data-project-details data-i18n="projects.viewDetails">View Details</button></div>
           </article>
           <article class="project-card" data-project-id="project-three" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Project Three" data-i18n-aria="project.card.three">
             <img class="project-image" src="./assets/images/project-commerce-placeholder.svg" alt="Online shop illustration" data-i18n-alt="project.image.three" loading="lazy" />
             <h3>Project Three</h3><p data-i18n="project.three.card">An e-commerce platform with secure payments and order tracking.</p>
-            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><span class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveDemo">Live Demo</span></div>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><button class="project-button project-button-details" type="button" data-project-details data-i18n="projects.viewDetails">View Details</button></div>
           </article>
         </div>
       </section>
 
-      <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <section id="contact" class="contact-section reveal" aria-labelledby="contact-title">
         <span class="dot-grid contact-dots" aria-hidden="true"></span><span class="accent-strokes contact-strokes" aria-hidden="true"></span>
         <div class="page-width contact-inner"><h2 id="contact-title" class="section-title decorated-title" data-i18n="contact.title">Contact Me</h2>
           <p class="contact-subtitle" data-i18n="contact.subtitle">I’d love to hear from you. Let’s connect.</p>
           <div class="contact-bar">
-            <a class="email-link" href="mailto:azherkindi@gmail.com"><span class="email-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg></span><span>azherkindi@gmail.com</span></a>
+            <div class="email-contact"><a class="email-link" href="mailto:azherkindi@gmail.com"><span class="email-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3.5 6 8.5 7 8.5-7"/></svg></span><span id="contact-email" class="email-address">azherkindi@gmail.com</span></a><button id="copy-email" class="copy-email-button" type="button" aria-label="Copy email" title="Copy email" data-i18n-aria="contact.copyEmail" data-i18n-title="contact.copyEmail" aria-describedby="copy-email-feedback"><svg class="copy-email-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2"/></svg><svg class="copy-success-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="m5 12 4 4L19 6"/></svg></button><span id="copy-email-feedback" class="copy-feedback" role="status" aria-live="polite" hidden></span></div>
             <a class="contact-social" href="https://github.com/azher-devs" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99c0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg></a>
             <a class="contact-social linkedin-mark" href="https://www.linkedin.com/in/al-azher-al-kindi-372a41361/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="Visit LinkedIn profile" data-i18n-aria="social.linkedin" data-i18n-title="social.linkedinTitle">in</a>
           </div>
@@ -113,9 +134,9 @@
     <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-hidden="true" hidden>
       <div class="modal-panel"><button id="project-modal-close" class="modal-close" type="button" aria-label="Close project details" data-i18n-aria="modal.close">×</button>
         <img id="project-modal-image" class="modal-image" src="./assets/images/project-dashboard-placeholder.svg" alt="" />
-        <div class="modal-heading"><p data-i18n="modal.title">Project Details</p><h3 id="project-modal-title" data-i18n="modal.projectTitlePlaceholder">Project title</h3></div>
+        <div class="modal-heading"><p data-i18n="modal.overview">Overview</p><h3 id="project-modal-title" data-i18n="modal.projectTitlePlaceholder">Project title</h3></div>
         <p id="project-modal-description" class="modal-description"></p>
-        <div class="modal-details"><div><h4 data-i18n="modal.technologies">Technologies</h4><div id="project-modal-technologies" class="modal-tags"></div></div><div><h4 data-i18n="modal.features">Key Features</h4><ul id="project-modal-features"></ul></div></div>
+        <div class="modal-details"><div><h4 data-i18n="modal.technologies">Technologies</h4><div id="project-modal-technologies" class="modal-tags"></div></div><div><h4 data-i18n="modal.features">Key Features</h4><ul id="project-modal-features"></ul></div><div id="project-modal-architecture" class="modal-architecture" hidden><h4 data-i18n="modal.architecture">Architecture</h4><ol id="project-modal-layers"></ol></div></div>
         <div class="modal-actions"><a id="project-modal-github" class="project-button project-button-primary" href="https://github.com/azher-devs" target="_blank" rel="noreferrer">GitHub</a><span id="project-modal-live" class="project-button project-button-unavailable" aria-disabled="true" data-i18n="projects.liveUnavailable">Live demo unavailable</span></div>
       </div>
     </div>
