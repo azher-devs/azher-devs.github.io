@@ -11,6 +11,9 @@ const backToTopButton = document.querySelector("#back-to-top");
 const revealElements = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const projectCards = document.querySelectorAll("[data-project-id]");
+const projectSearchInput = document.querySelector("#project-search-input");
+const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
+const projectResultsStatus = document.querySelector("#project-results-status");
 const projectDetailsButtons = document.querySelectorAll("[data-project-details]");
 const projectModal = document.querySelector("#project-modal");
 const projectModalClose = document.querySelector("#project-modal-close");
@@ -39,6 +42,7 @@ const projects = [
     description:
       "Student Management System is a Windows desktop application built with C# and Windows Forms. It allows users to manage student records and their course grades, search for students, calculate average grades, and save data locally in an Excel workbook.",
     technologies: ["C#", ".NET 10 for Windows", "Windows Forms", "ClosedXML 0.104.2", "Excel (.xlsx)"],
+    categories: ["desktop-applications"],
     features: [
       "Add, edit, and delete student records.",
       "Search students by student ID, full name, or major.",
@@ -59,6 +63,7 @@ const projects = [
     description:
       "A cross-platform mobile productivity concept for organizing tasks, tracking progress, and keeping common workflows simple across devices.",
     technologies: ["Flutter", "Dart", "Firebase", "RESTful APIs"],
+    categories: ["mobile-applications"],
     features: [
       "Mobile-first task management screens",
       "Simple status and priority organization",
@@ -74,6 +79,7 @@ const projects = [
     description:
       "An e-commerce platform concept with product browsing, shopping cart interactions, secure checkout flow planning, and order tracking screens.",
     technologies: ["ASP.NET Core", "Entity Framework Core", "SQL Server", "JavaScript"],
+    categories: ["web-development"],
     features: [
       "Product catalog and cart workflow",
       "Order tracking interface",
@@ -87,6 +93,7 @@ const projects = [
 let lastFocusedElement = null;
 let lockedScrollY = 0;
 let activeProjectId = null;
+let activeProjectCategory = "all";
 let copyEmailFeedbackTimeout = null;
 let mobileMenuCloseTimeout = null;
 let mobileMenuOpenFrame = null;
@@ -104,6 +111,56 @@ let currentLanguage = getSavedLanguage();
 
 function translate(key) {
   return localeCatalog[currentLanguage].strings[key] || key;
+}
+
+function normalizeSearchText(value) {
+  return String(value)
+    .normalize("NFKC")
+    .toLocaleLowerCase(currentLanguage)
+    .replace(/[\u064B-\u065F\u0670]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getProjectSearchText(project) {
+  const localizedProject = localeCatalog[currentLanguage].projects[project.id];
+  const projectIdSuffix = project.id.replace("project-", "");
+  const projectCategories = (project.categories || []).flatMap((category) => {
+    const categoryButton = projectFilterButtons.find((button) => button.dataset.projectFilter === category);
+    const translationKey = categoryButton?.dataset.i18n;
+    return [category, translationKey ? localeCatalog.en.strings[translationKey] : "", translationKey ? localeCatalog.ar.strings[translationKey] : ""];
+  });
+
+  return normalizeSearchText([
+    project.title,
+    project.titleKey ? translate(project.titleKey) : "",
+    project.description,
+    localizedProject?.description,
+    translate(`project.${projectIdSuffix}.card`),
+    ...project.technologies,
+    ...projectCategories,
+  ].filter(Boolean).join(" "));
+}
+
+function updateProjectResults() {
+  const query = normalizeSearchText(projectSearchInput?.value || "");
+  let visibleCount = 0;
+
+  projectCards.forEach((card) => {
+    const project = projects.find((item) => item.id === card.dataset.projectId);
+    if (!project) return;
+
+    const categoryMatches = activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory);
+    const searchMatches = !query || getProjectSearchText(project).includes(query);
+    const isVisible = categoryMatches && searchMatches;
+    card.hidden = !isVisible;
+    if (isVisible) visibleCount += 1;
+  });
+
+  projectResultsStatus.textContent = visibleCount === 0
+    ? translate("projects.empty")
+    : translate("projects.results").replace("{count}", String(visibleCount));
+  projectResultsStatus.classList.toggle("is-empty", visibleCount === 0);
 }
 
 function resetCopyEmailFeedback() {
@@ -160,6 +217,9 @@ function applyLanguage(language, persist = true) {
   document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
     element.alt = translate(element.dataset.i18nAlt);
   });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+    element.placeholder = translate(element.dataset.i18nPlaceholder);
+  });
 
   if (languageToggleLabel) {
     languageToggleLabel.textContent = localeCatalog[currentLanguage].languageOption;
@@ -182,6 +242,8 @@ function applyLanguage(language, persist = true) {
   document.querySelectorAll(".project-button-unavailable").forEach((element) => {
     element.textContent = translate(element.id === "project-modal-live" ? "projects.liveUnavailable" : "projects.liveDemo");
   });
+
+  updateProjectResults();
 
   if (activeProjectId && projectModal && !projectModal.hidden) {
     const activeProject = projects.find((project) => project.id === activeProjectId);
@@ -413,6 +475,19 @@ languageToggle?.addEventListener("click", () => {
 
 languageChoiceButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.languageChoice));
+});
+
+projectSearchInput?.addEventListener("input", updateProjectResults);
+projectFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeProjectCategory = button.dataset.projectFilter;
+    projectFilterButtons.forEach((filterButton) => {
+      const isSelected = filterButton === button;
+      filterButton.classList.toggle("is-selected", isSelected);
+      filterButton.setAttribute("aria-pressed", String(isSelected));
+    });
+    updateProjectResults();
+  });
 });
 
 copyEmailButton?.addEventListener("click", async () => {

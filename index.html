@@ -97,6 +97,20 @@
 
       <section id="projects" class="page-width section-spacing projects-section reveal" aria-labelledby="projects-title">
         <p class="section-kicker" data-i18n="projects.kicker">My Recent Work</p><h2 id="projects-title" class="section-title decorated-title" data-i18n="projects.title">Projects</h2>
+        <div class="project-controls">
+          <label class="project-search" for="project-search-input">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+            <input id="project-search-input" type="search" aria-label="Search projects" data-i18n-aria="projects.search.label" data-i18n-placeholder="projects.search.placeholder" placeholder="Search projects by name, technology, or category..." autocomplete="off" />
+          </label>
+          <div class="project-filters" role="group" aria-label="Filter projects by category" data-i18n-aria="projects.filter.label">
+            <button class="project-filter is-selected" type="button" data-project-filter="all" aria-pressed="true" data-i18n="projects.category.all">All</button>
+            <button class="project-filter" type="button" data-project-filter="web-development" aria-pressed="false" data-i18n="projects.category.web">Web Development</button>
+            <button class="project-filter" type="button" data-project-filter="desktop-applications" aria-pressed="false" data-i18n="projects.category.desktop">Desktop Applications</button>
+            <button class="project-filter" type="button" data-project-filter="mobile-applications" aria-pressed="false" data-i18n="projects.category.mobile">Mobile Applications</button>
+            <button class="project-filter" type="button" data-project-filter="ai-projects" aria-pressed="false" data-i18n="projects.category.ai">AI Projects</button>
+          </div>
+        </div>
+        <p id="project-results-status" class="project-results-status" role="status" aria-live="polite"></p>
         <div class="projects-grid">
           <article class="project-card" data-project-id="project-one" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Student Management System" data-i18n-aria="project.card.one">
             <img class="project-image" src="./assets/images/student-management-system-dashboard.png" alt="Student Management System dashboard screenshot" data-i18n-alt="project.image.one" loading="lazy" />
