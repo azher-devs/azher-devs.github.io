@@ -11,7 +11,6 @@ const backToTopButton = document.querySelector("#back-to-top");
 const revealElements = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const projectCards = document.querySelectorAll("[data-project-id]");
-const projectSearchInput = document.querySelector("#project-search-input");
 const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
 const projectResultsStatus = document.querySelector("#project-results-status");
 const projectDetailsButtons = document.querySelectorAll("[data-project-details]");
@@ -59,35 +58,88 @@ const projects = [
   },
   {
     id: "project-two",
-    title: "Project Two",
+    title: "ITSM Device Registration System",
+    titleKey: "project.two.title",
     description:
-      "A cross-platform mobile productivity concept for organizing tasks, tracking progress, and keeping common workflows simple across devices.",
-    technologies: ["Flutter", "Dart", "Firebase", "RESTful APIs"],
+      "A Flutter mobile application for registering employee devices, verifying assignments, scanning barcodes, and managing device assignments through a simple workflow.",
+    technologies: ["Flutter", "Dart", "Riverpod", "Dio", "Google ML Kit Barcode Scanning", "Shared Preferences", "Flutter Localization", "Image Picker", "Permission Handler", "Audio Players"],
     categories: ["mobile-applications"],
     features: [
-      "Mobile-first task management screens",
-      "Simple status and priority organization",
-      "Cloud-ready data structure",
-      "Clean interface for repeated daily use",
+      "Login and device registration workflow.",
+      "Device lookup using Tag Number.",
+      "Employee verification using Employee ID.",
+      "Display device and employee details after validation.",
+      "Barcode scanning using the camera and Google ML Kit.",
+      "Add and remove device assignments.",
+      "English and Arabic localization.",
+      "Light and Dark themes.",
+      "Persisted language and appearance preferences.",
+      "Demo mode for reviewing the UI without a backend.",
     ],
-    image: "./assets/images/project-mobile-placeholder.svg",
-    githubUrl: "https://github.com/azher-devs",
+    image: "./assets/images/itsm-device-registration-showcase.png",
+    imageAltKey: "project.image.two",
+    githubUrl: "https://github.com/azher-devs/itsm-device-registration-system",
   },
   {
     id: "project-three",
-    title: "Project Three",
+    title: "Habit Tracker",
+    titleKey: "project.three.title",
     description:
-      "An e-commerce platform concept with product browsing, shopping cart interactions, secure checkout flow planning, and order tracking screens.",
-    technologies: ["ASP.NET Core", "Entity Framework Core", "SQL Server", "JavaScript"],
-    categories: ["web-development"],
+      "An offline Flutter app for tracking daily habits and goals, with monthly calendars, detailed statistics, daily notes, and local backup and restore.",
+    technologies: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite", "GoRouter", "Flutter Quill", "FL Chart", "Archive", "File Picker", "Path Provider", "UUID", "Intl", "Flutter Localization"],
+    categories: ["mobile-applications"],
     features: [
-      "Product catalog and cart workflow",
-      "Order tracking interface",
-      "Secure payment flow structure",
-      "Responsive storefront layout",
+      "Create, edit, organize, archive, and restore goal folders.",
+      "Track daily progress using a monthly calendar.",
+      "Mark days as completed or missed.",
+      "Add rich-text daily notes.",
+      "View monthly completion rates and current/longest streaks.",
+      "Review weekly and monthly statistics.",
+      "Compare performance with the previous month.",
+      "Back up and restore local data using ZIP files.",
+      "Switch between Arabic and English.",
+      "Choose light or dark appearance.",
+      "Store data locally without requiring an account or backend.",
     ],
+    image: "./assets/images/habit-tracker-showcase.png",
+    imageAltKey: "project.image.three",
+    githubUrl: "https://github.com/azher-devs/habit-tracker",
+  },
+  {
+    id: "project-four",
+    title: "Project 4",
+    titleKey: "project.four.title",
+    description: "A sample web application designed to simplify everyday tasks through a clean and user-friendly interface.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    categories: ["web-development"],
+    features: ["Placeholder example: organize everyday tasks.", "Placeholder example: review and update task information.", "Replace these examples with verified project features."],
     image: "./assets/images/project-commerce-placeholder.svg",
-    githubUrl: "https://github.com/azher-devs",
+    imageAltKey: "project.image.four",
+    githubUrl: "https://github.com/REPLACE_WITH_PROJECT_4_REPOSITORY",
+  },
+  {
+    id: "project-five",
+    title: "Project 5",
+    titleKey: "project.five.title",
+    description: "A sample desktop application for organizing information, managing records, and improving productivity.",
+    technologies: ["C#", ".NET", "SQL Server"],
+    categories: ["desktop-applications"],
+    features: ["Placeholder example: organize information and records.", "Placeholder example: browse and update stored records.", "Replace these examples with verified project features."],
+    image: "./assets/images/project-dashboard-placeholder.svg",
+    imageAltKey: "project.image.five",
+    githubUrl: "https://github.com/REPLACE_WITH_PROJECT_5_REPOSITORY",
+  },
+  {
+    id: "project-six",
+    title: "Project 6",
+    titleKey: "project.six.title",
+    description: "A sample mobile application for tracking activities, viewing progress, and managing personal goals.",
+    technologies: ["Flutter", "Dart", "SQLite"],
+    categories: ["mobile-applications"],
+    features: ["Placeholder example: track personal activities.", "Placeholder example: review progress toward goals.", "Replace these examples with verified project features."],
+    image: "./assets/images/project-mobile-placeholder.svg",
+    imageAltKey: "project.image.six",
+    githubUrl: "https://github.com/REPLACE_WITH_PROJECT_6_REPOSITORY",
   },
 ];
 let lastFocusedElement = null;
@@ -113,37 +165,7 @@ function translate(key) {
   return localeCatalog[currentLanguage].strings[key] || key;
 }
 
-function normalizeSearchText(value) {
-  return String(value)
-    .normalize("NFKC")
-    .toLocaleLowerCase(currentLanguage)
-    .replace(/[\u064B-\u065F\u0670]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function getProjectSearchText(project) {
-  const localizedProject = localeCatalog[currentLanguage].projects[project.id];
-  const projectIdSuffix = project.id.replace("project-", "");
-  const projectCategories = (project.categories || []).flatMap((category) => {
-    const categoryButton = projectFilterButtons.find((button) => button.dataset.projectFilter === category);
-    const translationKey = categoryButton?.dataset.i18n;
-    return [category, translationKey ? localeCatalog.en.strings[translationKey] : "", translationKey ? localeCatalog.ar.strings[translationKey] : ""];
-  });
-
-  return normalizeSearchText([
-    project.title,
-    project.titleKey ? translate(project.titleKey) : "",
-    project.description,
-    localizedProject?.description,
-    translate(`project.${projectIdSuffix}.card`),
-    ...project.technologies,
-    ...projectCategories,
-  ].filter(Boolean).join(" "));
-}
-
 function updateProjectResults() {
-  const query = normalizeSearchText(projectSearchInput?.value || "");
   let visibleCount = 0;
 
   projectCards.forEach((card) => {
@@ -151,10 +173,8 @@ function updateProjectResults() {
     if (!project) return;
 
     const categoryMatches = activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory);
-    const searchMatches = !query || getProjectSearchText(project).includes(query);
-    const isVisible = categoryMatches && searchMatches;
-    card.hidden = !isVisible;
-    if (isVisible) visibleCount += 1;
+    card.hidden = !categoryMatches;
+    if (categoryMatches) visibleCount += 1;
   });
 
   projectResultsStatus.textContent = visibleCount === 0
@@ -217,10 +237,6 @@ function applyLanguage(language, persist = true) {
   document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
     element.alt = translate(element.dataset.i18nAlt);
   });
-  document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
-    element.placeholder = translate(element.dataset.i18nPlaceholder);
-  });
-
   if (languageToggleLabel) {
     languageToggleLabel.textContent = localeCatalog[currentLanguage].languageOption;
     languageToggleLabel.lang = currentLanguage === "en" ? "ar" : "en";
@@ -477,7 +493,6 @@ languageChoiceButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.languageChoice));
 });
 
-projectSearchInput?.addEventListener("input", updateProjectResults);
 projectFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeProjectCategory = button.dataset.projectFilter;

@@ -114,19 +114,12 @@
   .skill-card li::before { position: absolute; top: .55em; inset-inline-start: -1.35rem; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); content: ""; }
   .section-kicker { margin: 0 0 .4rem; text-align: center; font-size: 1.35rem; }
   .projects-section { position: relative; }
-  .project-controls { display: grid; grid-template-columns: minmax(230px, .8fr) minmax(0, 1.7fr); align-items: center; gap: 1rem 1.4rem; margin-top: 2rem; }
-  .project-search { min-width: 0; min-height: 50px; display: flex; align-items: center; gap: .7rem; border: 1.4px solid #aeb8b6; border-radius: 12px; padding-inline: .9rem; background: rgba(255,253,248,.72); transition: border-color .18s ease, box-shadow .18s ease; }
-  .project-search:focus-within { border-color: #078f89; box-shadow: 0 0 0 3px rgba(8,196,188,.16); }
-  .project-search svg { width: 21px; height: 21px; flex: 0 0 21px; fill: none; stroke: #53616a; stroke-width: 1.8; stroke-linecap: round; }
-  .project-search input { width: 100%; min-width: 0; min-height: 46px; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: .98rem; }
-  .project-search input::placeholder { color: #69737b; opacity: 1; }
-  .project-search input::-webkit-search-cancel-button { cursor: pointer; }
-  .project-filters { min-width: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .5rem; }
+  .project-filters { width: 100%; max-width: 1140px; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem; margin: 2rem auto 0; }
   .project-filter { min-height: 42px; border: 1px solid #b9c3c0; border-radius: 999px; padding: .5rem .85rem; background: rgba(255,253,248,.7); color: var(--ink); font: inherit; font-size: .9rem; font-weight: 600; line-height: 1.2; cursor: pointer; transition: color .18s ease, border-color .18s ease, background-color .18s ease, transform .18s ease; }
   .project-filter:hover { border-color: #078f89; background: #edf7f3; }
   .project-filter.is-selected { border-color: #079b95; background: #b8efe6; color: #067b76; }
   .project-filter:active { transform: scale(.98); }
-  .project-results-status { min-height: 1.4em; margin: 1rem 0 -.55rem; color: #59636b; font-size: .92rem; }
+  .project-results-status { min-height: 1.4em; margin: 1rem 0 -.55rem; color: #59636b; font-size: .92rem; text-align: center; }
   .project-results-status.is-empty { color: #087e79; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.4rem; margin-top: 1.4rem; }
   .project-card { min-width: 0; display: flex; flex-direction: column; border: 1.6px solid #16252a; border-radius: 19px; padding: 1.35rem; background: rgba(255,253,248,.55); box-shadow: 0 12px 19px -16px rgba(8,196,188,.85); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
@@ -317,9 +310,8 @@
   .skill-card, .skill-card:nth-child(4), .skill-card:nth-child(5) { grid-column: auto; min-height: 0; padding: 1.3rem; }
   .skill-card h3 { margin-top: .85rem; }
   .skill-card ul { gap: .35rem; }
-  .project-controls { grid-template-columns: 1fr; gap: .8rem; margin-top: 1.5rem; }
-  .project-filters { justify-content: flex-start; gap: .45rem; }
-  .project-filter { min-height: 44px; padding-inline: .75rem; font-size: .88rem; }
+  .project-filters { gap: .5rem; margin-top: 1.5rem; }
+  .project-filter { min-height: 44px; padding-inline: .72rem; font-size: .88rem; }
   .project-results-status { margin-top: .8rem; }
   .projects-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; }
   .project-card { padding: 1rem; }
