@@ -203,9 +203,9 @@ function updateProjectResults({ animate = false } = {}) {
     if (categoryMatches) visibleCount += 1;
   });
 
-  projectResultsStatus.textContent = visibleCount === 0
-    ? translate("projects.empty")
-    : translate("projects.results").replace("{count}", String(visibleCount));
+  projectResultsStatus.textContent = translate("projects.results")
+    .replace("{visibleCount}", String(visibleCount))
+    .replace("{totalCount}", String(projects.length));
   projectResultsStatus.classList.toggle("is-empty", visibleCount === 0);
 }
 
