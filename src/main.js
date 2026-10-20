@@ -56,7 +56,7 @@ const projects = [
     image: "./assets/images/student-management-system-dashboard.png",
     imageAltKey: "project.image.one",
     githubUrl: "https://github.com/azher-devs/Student-Management-System",
-    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
+    youtubeUrl: "https://youtu.be/9AqC1JDK598?si=rj4etM1C9XWKPT0w",
   },
   {
     id: "project-two",
@@ -81,7 +81,7 @@ const projects = [
     image: "./assets/images/itsm-device-registration-showcase.png",
     imageAltKey: "project.image.two",
     githubUrl: "https://github.com/azher-devs/itsm-device-registration-system",
-    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
+    youtubeUrl: "https://youtube.com/shorts/YnAZRDnqSNs?si=NSnE66X8hRv67TOJ",
   },
   {
     id: "project-three",
@@ -107,7 +107,7 @@ const projects = [
     image: "./assets/images/habit-tracker-showcase.png",
     imageAltKey: "project.image.three",
     githubUrl: "https://github.com/azher-devs/habit-tracker",
-    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
+    youtubeUrl: "https://youtube.com/shorts/Q9aArNgEMTI?si=yFn2S4T1EVMBL-Lm",
   },
   {
     id: "project-four",
