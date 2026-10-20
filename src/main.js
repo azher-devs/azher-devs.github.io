@@ -24,7 +24,8 @@ const projectModalFeatures = document.querySelector("#project-modal-features");
 const projectModalArchitecture = document.querySelector("#project-modal-architecture");
 const projectModalLayers = document.querySelector("#project-modal-layers");
 const projectModalGithub = document.querySelector("#project-modal-github");
-const projectModalLive = document.querySelector("#project-modal-live");
+const projectModalYoutube = document.querySelector("#project-modal-youtube");
+const projectModalYoutubeLabel = projectModalYoutube?.querySelector("[data-i18n='projects.watchYoutube']");
 const copyEmailButton = document.querySelector("#copy-email");
 const contactEmail = document.querySelector("#contact-email");
 const copyEmailIcon = document.querySelector(".copy-email-icon");
@@ -55,6 +56,7 @@ const projects = [
     image: "./assets/images/student-management-system-dashboard.png",
     imageAltKey: "project.image.one",
     githubUrl: "https://github.com/azher-devs/Student-Management-System",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
   {
     id: "project-two",
@@ -79,6 +81,7 @@ const projects = [
     image: "./assets/images/itsm-device-registration-showcase.png",
     imageAltKey: "project.image.two",
     githubUrl: "https://github.com/azher-devs/itsm-device-registration-system",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
   {
     id: "project-three",
@@ -104,6 +107,7 @@ const projects = [
     image: "./assets/images/habit-tracker-showcase.png",
     imageAltKey: "project.image.three",
     githubUrl: "https://github.com/azher-devs/habit-tracker",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
   {
     id: "project-four",
@@ -116,6 +120,7 @@ const projects = [
     image: "./assets/images/project-commerce-placeholder.svg",
     imageAltKey: "project.image.four",
     githubUrl: "https://github.com/REPLACE_WITH_PROJECT_4_REPOSITORY",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
   {
     id: "project-five",
@@ -128,6 +133,7 @@ const projects = [
     image: "./assets/images/project-dashboard-placeholder.svg",
     imageAltKey: "project.image.five",
     githubUrl: "https://github.com/REPLACE_WITH_PROJECT_5_REPOSITORY",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
   {
     id: "project-six",
@@ -140,6 +146,7 @@ const projects = [
     image: "./assets/images/project-mobile-placeholder.svg",
     imageAltKey: "project.image.six",
     githubUrl: "https://github.com/REPLACE_WITH_PROJECT_6_REPOSITORY",
+    youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
 ];
 let lastFocusedElement = null;
@@ -165,7 +172,7 @@ function translate(key) {
   return localeCatalog[currentLanguage].strings[key] || key;
 }
 
-function updateProjectResults() {
+function updateProjectResults({ animate = false } = {}) {
   let visibleCount = 0;
 
   projectCards.forEach((card) => {
@@ -173,7 +180,26 @@ function updateProjectResults() {
     if (!project) return;
 
     const categoryMatches = activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory);
+
+    const wasHidden = card.hidden;
     card.hidden = !categoryMatches;
+    card.inert = !categoryMatches;
+
+    if (categoryMatches) {
+      card.removeAttribute("aria-hidden");
+
+      if (animate && !prefersReducedMotion.matches && wasHidden) {
+        card.classList.add("is-filtering-in");
+        card.getBoundingClientRect();
+        card.classList.remove("is-filtering-in");
+      } else {
+        card.classList.remove("is-filtering-in");
+      }
+    } else {
+      card.setAttribute("aria-hidden", "true");
+      card.classList.remove("is-filtering-in");
+    }
+
     if (categoryMatches) visibleCount += 1;
   });
 
@@ -254,10 +280,6 @@ function applyLanguage(language, persist = true) {
     copyEmailButton.title = message;
     copyEmailFeedback.textContent = message;
   }
-
-  document.querySelectorAll(".project-button-unavailable").forEach((element) => {
-    element.textContent = translate(element.id === "project-modal-live" ? "projects.liveUnavailable" : "projects.liveDemo");
-  });
 
   updateProjectResults();
 
@@ -364,8 +386,25 @@ function renderProjectDetails(project) {
   projectModalDescription.textContent = localizedProject.description;
   projectModalGithub.href = project.githubUrl;
   projectModalGithub.setAttribute("aria-label", translate("social.github"));
-  projectModalLive.textContent = translate("projects.liveUnavailable");
-  projectModalLive.setAttribute("aria-disabled", "true");
+  projectModalYoutubeLabel.textContent = translate("projects.watchYoutube");
+  const youtubeUrl = getValidYoutubeUrl(project.youtubeUrl);
+  if (youtubeUrl) {
+    projectModalYoutube.href = youtubeUrl;
+    projectModalYoutube.target = "_blank";
+    projectModalYoutube.rel = "noopener noreferrer";
+    projectModalYoutube.removeAttribute("aria-disabled");
+    projectModalYoutube.removeAttribute("tabindex");
+    projectModalYoutube.classList.remove("project-button-unavailable");
+    projectModalYoutube.title = translate("projects.watchYoutube");
+  } else {
+    projectModalYoutube.removeAttribute("href");
+    projectModalYoutube.removeAttribute("target");
+    projectModalYoutube.removeAttribute("rel");
+    projectModalYoutube.setAttribute("aria-disabled", "true");
+    projectModalYoutube.setAttribute("tabindex", "-1");
+    projectModalYoutube.classList.add("project-button-unavailable");
+    projectModalYoutube.title = translate("projects.videoComingSoon");
+  }
 
   projectModalTechnologies.replaceChildren(
     ...project.technologies.map((technology) => {
@@ -396,6 +435,28 @@ function renderProjectDetails(project) {
       return item;
     })
   );
+}
+
+function getValidYoutubeUrl(value) {
+  if (typeof value !== "string" || !value.trim()) return null;
+
+  try {
+    const url = new URL(value.trim());
+    if (url.protocol !== "https:" || url.username || url.password || url.port) return null;
+
+    const host = url.hostname.toLowerCase();
+    let videoId = "";
+    if (host === "youtube.com" || host === "www.youtube.com" || host === "m.youtube.com") {
+      if (url.pathname === "/watch") videoId = url.searchParams.get("v") || "";
+      else videoId = url.pathname.match(/^\/(?:shorts|embed)\/([\w-]{11})\/?$/)?.[1] || "";
+    } else if (host === "youtu.be" || host === "www.youtu.be") {
+      videoId = url.pathname.match(/^\/([\w-]{11})\/?$/)?.[1] || "";
+    }
+
+    return /^[\w-]{11}$/.test(videoId) ? url.href : null;
+  } catch {
+    return null;
+  }
 }
 
 function openProjectModal(projectId) {
@@ -501,7 +562,7 @@ projectFilterButtons.forEach((button) => {
       filterButton.classList.toggle("is-selected", isSelected);
       filterButton.setAttribute("aria-pressed", String(isSelected));
     });
-    updateProjectResults();
+    updateProjectResults({ animate: true });
   });
 });
 
