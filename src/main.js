@@ -54,7 +54,10 @@ const projects = [
       "Save and load student and grade data from a local Excel workbook.",
       "Display validation, loading, and saving error messages.",
     ],
-    image: "./assets/images/student-management-system-dashboard.png",
+    image: "./assets/images/student-management-system-dashboard-card.webp",
+    detailImage: "./assets/images/student-management-system-dashboard-detail.webp",
+    imageWidth: 768,
+    imageHeight: 432,
     imageAltKey: "project.image.one",
     githubUrl: "https://github.com/azher-devs/Student-Management-System",
     youtubeUrl: "https://youtu.be/9AqC1JDK598?si=rj4etM1C9XWKPT0w",
@@ -79,7 +82,10 @@ const projects = [
       "Persisted language and appearance preferences.",
       "Demo mode for reviewing the UI without a backend.",
     ],
-    image: "./assets/images/itsm-device-registration-showcase.png",
+    image: "./assets/images/itsm-device-registration-showcase-card.webp",
+    detailImage: "./assets/images/itsm-device-registration-showcase-detail.webp",
+    imageWidth: 768,
+    imageHeight: 432,
     imageAltKey: "project.image.two",
     githubUrl: "https://github.com/azher-devs/itsm-device-registration-system",
     youtubeUrl: "https://youtube.com/shorts/YnAZRDnqSNs?si=NSnE66X8hRv67TOJ",
@@ -105,7 +111,10 @@ const projects = [
       "Choose light or dark appearance.",
       "Store data locally without requiring an account or backend.",
     ],
-    image: "./assets/images/habit-tracker-showcase.png",
+    image: "./assets/images/habit-tracker-showcase-card.webp",
+    detailImage: "./assets/images/habit-tracker-showcase-detail.webp",
+    imageWidth: 768,
+    imageHeight: 432,
     imageAltKey: "project.image.three",
     githubUrl: "https://github.com/azher-devs/habit-tracker",
     youtubeUrl: "https://youtube.com/shorts/Q9aArNgEMTI?si=yFn2S4T1EVMBL-Lm",
@@ -388,7 +397,10 @@ function setModalOpen(isOpen) {
 
 function renderProjectDetails(project) {
   const localizedProject = localeCatalog[currentLanguage].projects[project.id];
-  projectModalImage.src = project.image;
+  projectModalImage.src = project.detailImage || project.image;
+  projectModalImage.width = project.detailImage ? 1200 : project.imageWidth || 640;
+  projectModalImage.height = project.detailImage ? 675 : project.imageHeight || 360;
+  projectModalImage.loading = "eager";
   projectModalImage.alt = project.imageAltKey ? translate(project.imageAltKey) : `${project.title} ${translate("modal.projectPreview")}`;
   projectModalTitle.textContent = project.titleKey ? translate(project.titleKey) : project.title;
   projectModalDescription.textContent = localizedProject.description;
