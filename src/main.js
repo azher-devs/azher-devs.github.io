@@ -112,6 +112,7 @@ const projects = [
   },
   {
     id: "project-four",
+    isVisible: false,
     title: "Project 4",
     titleKey: "project.four.title",
     description: "A sample web application designed to simplify everyday tasks through a clean and user-friendly interface.",
@@ -125,6 +126,7 @@ const projects = [
   },
   {
     id: "project-five",
+    isVisible: false,
     title: "Project 5",
     titleKey: "project.five.title",
     description: "A sample desktop application for organizing information, managing records, and improving productivity.",
@@ -138,6 +140,7 @@ const projects = [
   },
   {
     id: "project-six",
+    isVisible: false,
     title: "Project 6",
     titleKey: "project.six.title",
     description: "A sample mobile application for tracking activities, viewing progress, and managing personal goals.",
@@ -175,12 +178,14 @@ function translate(key) {
 
 function updateProjectResults({ animate = false } = {}) {
   let visibleCount = 0;
+  const totalCount = projects.filter((project) => project.isVisible !== false).length;
 
   projectCards.forEach((card) => {
     const project = projects.find((item) => item.id === card.dataset.projectId);
     if (!project) return;
 
-    const categoryMatches = activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory);
+    const categoryMatches = project.isVisible !== false &&
+      (activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory));
 
     const wasHidden = card.hidden;
     card.hidden = !categoryMatches;
@@ -206,7 +211,7 @@ function updateProjectResults({ animate = false } = {}) {
 
   projectResultsStatus.textContent = translate("projects.results")
     .replace("{visibleCount}", String(visibleCount))
-    .replace("{totalCount}", String(projects.length));
+    .replace("{totalCount}", String(totalCount));
   projectResultsStatus.classList.toggle("is-empty", visibleCount === 0);
 }
 
