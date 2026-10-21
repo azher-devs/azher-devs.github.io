@@ -4,9 +4,10 @@ const mobileMenuPanel = mobileMenu?.querySelector(".mobile-menu");
 const mobileMenuClose = document.querySelector("#mobile-menu-close");
 const mobileMenuOverlay = mobileMenu?.querySelector(".mobile-menu-overlay");
 const mobileMenuLinks = [...document.querySelectorAll("[data-menu-link]")];
-const languageChoiceButtons = document.querySelectorAll("[data-language-choice]");
 const languageToggle = document.querySelector("#language-toggle");
 const languageToggleLabel = document.querySelector("#language-toggle-label");
+const mobileLanguageToggle = document.querySelector("#mobile-language-toggle");
+const mobileLanguageLabel = document.querySelector("#mobile-language-label");
 const backToTopButton = document.querySelector("#back-to-top");
 const revealElements = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -268,10 +269,12 @@ function applyLanguage(language, persist = true) {
     languageToggleLabel.lang = currentLanguage === "en" ? "ar" : "en";
   }
   languageToggle?.setAttribute("aria-label", translate(switchLanguageKey));
+  if (mobileLanguageLabel) {
+    mobileLanguageLabel.textContent = currentLanguage === "en" ? "EN" : "عربي";
+    mobileLanguageLabel.lang = currentLanguage;
+  }
+  mobileLanguageToggle?.setAttribute("aria-label", translate(switchLanguageKey));
   menuToggle?.setAttribute("aria-label", translate(menuToggle.getAttribute("aria-expanded") === "true" ? "menu.close" : "menu.open"));
-  languageChoiceButtons.forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.languageChoice === currentLanguage));
-  });
 
   if (copyEmailButton?.dataset.copyState) {
     const messageKey = copyEmailButton.dataset.copyState === "success" ? "contact.copied" : "contact.copyFailed";
@@ -550,8 +553,8 @@ languageToggle?.addEventListener("click", () => {
   applyLanguage(currentLanguage === "en" ? "ar" : "en");
 });
 
-languageChoiceButtons.forEach((button) => {
-  button.addEventListener("click", () => applyLanguage(button.dataset.languageChoice));
+mobileLanguageToggle?.addEventListener("click", () => {
+  applyLanguage(currentLanguage === "en" ? "ar" : "en");
 });
 
 projectFilterButtons.forEach((button) => {
