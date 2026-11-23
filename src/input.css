@@ -122,6 +122,16 @@
   .project-results-status { min-height: 1.4em; margin: 1rem 0 -.55rem; color: #59636b; font-size: .92rem; text-align: center; }
   .project-results-status.is-empty { color: #087e79; }
   .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.4rem; margin-top: 1.4rem; }
+  .project-pagination { margin-top: 1.35rem; text-align: center; }
+  .project-pagination[hidden] { display: none; }
+  .project-show-more { width: 100%; min-height: 58px; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; border: 1.6px solid var(--line); border-radius: 999px; padding: .8rem 1.2rem; background: #55dec9; box-shadow: 0 6px 0 var(--line); color: var(--ink); font: inherit; font-size: 1.05rem; font-weight: 750; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+  .project-show-more:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--line); background: #68e1d6; }
+  .project-show-more:active { transform: translateY(3px); box-shadow: 0 3px 0 var(--line); }
+  .project-show-more:focus-visible { outline: 3px solid #078f89; outline-offset: 4px; }
+  .project-show-more-icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: transform .25s ease; }
+  .project-show-more-icon.is-expanded { transform: rotate(180deg); }
+  .project-hidden-count { margin: .8rem 0 0; color: #59636b; font-size: .95rem; }
+  @media (prefers-reduced-motion: reduce) { .project-show-more, .project-show-more-icon { transition: none; } }
   .project-card { min-width: 0; display: flex; flex-direction: column; border: 1.6px solid #16252a; border-radius: 19px; padding: 1.35rem; background: rgba(255,253,248,.55); box-shadow: 0 12px 19px -16px rgba(8,196,188,.85); cursor: pointer; transition: opacity .25s ease, transform .25s ease, box-shadow .2s ease, border-color .2s ease; }
   @media (hover: hover) and (pointer: fine) {
     .project-card:hover, .project-card:focus-visible { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 18px 24px -16px rgba(8,196,188,.72); }

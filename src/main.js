@@ -14,6 +14,8 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const projectCards = document.querySelectorAll("[data-project-id]");
 const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
 const projectResultsStatus = document.querySelector("#project-results-status");
+const projectShowMore = document.querySelector("#project-show-more");
+const projectHiddenCount = document.querySelector("#project-hidden-count");
 const projectDetailsButtons = document.querySelectorAll("[data-project-details]");
 const projectModal = document.querySelector("#project-modal");
 const projectModalClose = document.querySelector("#project-modal-close");
@@ -161,11 +163,32 @@ const projects = [
     githubUrl: "https://github.com/REPLACE_WITH_PROJECT_6_REPOSITORY",
     youtubeUrl: "", // TODO: Add this project's YouTube video URL.
   },
+  {
+    id: "project-seven",
+    title: "Nizwa Fort Explorer",
+    titleKey: "project.seven.title",
+    description: "A bilingual interactive 3D explorer for Nizwa Fort, built with React, TypeScript, and Three.js.",
+    technologies: ["React 19", "TypeScript", "Three.js", "React Three Fiber", "Drei", "Vite"],
+    categories: ["game-development"],
+    features: [
+      "Explore a procedurally built 3D fort model with mouse, touch, and camera controls.",
+      "Rotate, zoom, and reset the view; toggle automatic rotation and model hotspots.",
+      "Select fort sections to read descriptions, topics, notes, and references.",
+      "Switch between Arabic and English with right-to-left and left-to-right layouts.",
+    ],
+    image: "./assets/images/nizwa-fort-explorer.png",
+    imageWidth: 1448,
+    imageHeight: 1086,
+    imageAltKey: "project.image.seven",
+    githubUrl: "https://github.com/azher-devs/nizwa-fort-explorer",
+    youtubeUrl: "",
+  },
 ];
 let lastFocusedElement = null;
 let lockedScrollY = 0;
 let activeProjectId = null;
 let activeProjectCategory = "all";
+let projectsExpanded = false;
 let copyEmailFeedbackTimeout = null;
 let mobileMenuCloseTimeout = null;
 let mobileMenuOpenFrame = null;
@@ -189,12 +212,20 @@ function updateProjectResults({ animate = false } = {}) {
   let visibleCount = 0;
   const totalCount = projects.filter((project) => project.isVisible !== false).length;
 
+  const matchingCards = [...projectCards].filter((card) => {
+    const project = projects.find((item) => item.id === card.dataset.projectId);
+    return project && project.isVisible !== false &&
+      (activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory));
+  });
+  const hiddenCount = Math.max(0, matchingCards.length - 3);
+  const showAll = projectsExpanded || hiddenCount === 0;
+  const visibleCards = new Set(showAll ? matchingCards : matchingCards.slice(0, 3));
+
   projectCards.forEach((card) => {
     const project = projects.find((item) => item.id === card.dataset.projectId);
     if (!project) return;
 
-    const categoryMatches = project.isVisible !== false &&
-      (activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory));
+    const categoryMatches = visibleCards.has(card);
 
     const wasHidden = card.hidden;
     card.hidden = !categoryMatches;
@@ -215,13 +246,23 @@ function updateProjectResults({ animate = false } = {}) {
       card.classList.remove("is-filtering-in");
     }
 
-    if (categoryMatches) visibleCount += 1;
   });
+
+  visibleCount = visibleCards.size;
 
   projectResultsStatus.textContent = translate("projects.results")
     .replace("{visibleCount}", String(visibleCount))
     .replace("{totalCount}", String(totalCount));
   projectResultsStatus.classList.toggle("is-empty", visibleCount === 0);
+  const pagination = document.querySelector("#project-pagination");
+  if (pagination && projectShowMore && projectHiddenCount) {
+    pagination.hidden = hiddenCount === 0;
+    projectShowMore.setAttribute("aria-expanded", String(projectsExpanded));
+    projectShowMore.querySelector("[data-i18n]").textContent = translate(projectsExpanded ? "projects.showLess" : "projects.showMore");
+    projectShowMore.querySelector("svg").classList.toggle("is-expanded", projectsExpanded);
+    const countKey = hiddenCount === 1 ? "projects.moreCount.one" : "projects.moreCount";
+    projectHiddenCount.textContent = projectsExpanded ? "" : translate(countKey).replace("{count}", String(hiddenCount));
+  }
 }
 
 function resetCopyEmailFeedback() {
@@ -577,6 +618,7 @@ mobileLanguageToggle?.addEventListener("click", () => {
 projectFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     activeProjectCategory = button.dataset.projectFilter;
+    projectsExpanded = false;
     projectFilterButtons.forEach((filterButton) => {
       const isSelected = filterButton === button;
       filterButton.classList.toggle("is-selected", isSelected);
@@ -584,6 +626,11 @@ projectFilterButtons.forEach((button) => {
     });
     updateProjectResults({ animate: true });
   });
+});
+
+projectShowMore?.addEventListener("click", () => {
+  projectsExpanded = !projectsExpanded;
+  updateProjectResults({ animate: true });
 });
 
 copyEmailButton?.addEventListener("click", async () => {
