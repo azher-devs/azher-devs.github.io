@@ -99,10 +99,11 @@
           <button class="project-filter" type="button" data-project-filter="web-development" aria-pressed="false" data-i18n="projects.category.web">Web Development</button>
           <button class="project-filter" type="button" data-project-filter="desktop-applications" aria-pressed="false" data-i18n="projects.category.desktop">Desktop Applications</button>
           <button class="project-filter" type="button" data-project-filter="mobile-applications" aria-pressed="false" data-i18n="projects.category.mobile">Mobile Applications</button>
+          <button class="project-filter" type="button" data-project-filter="game-development" aria-pressed="false" data-i18n="projects.category.game">Game Development</button>
           <button class="project-filter" type="button" data-project-filter="ai-projects" aria-pressed="false" data-i18n="projects.category.ai">AI Projects</button>
         </div>
         <p id="project-results-status" class="project-results-status" role="status" aria-live="polite"></p>
-        <div class="projects-grid">
+        <div class="projects-grid" id="project-list">
           <article class="project-card" data-project-id="project-one" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Student Management System" data-i18n-aria="project.card.one">
             <img class="project-image" src="./assets/images/student-management-system-dashboard-card.webp" alt="Student Management System dashboard screenshot" data-i18n-alt="project.image.one" width="768" height="432" loading="lazy" decoding="async" />
             <h3 data-i18n="project.one.title">Student Management System</h3><p data-i18n="project.one.card">A Windows desktop application for managing student records, course grades, and average grades, with local Excel data storage.</p>
@@ -133,6 +134,18 @@
             <h3 data-i18n="project.six.title">Project 6</h3><p data-i18n="project.six.card">A sample mobile application for tracking activities, viewing progress, and managing personal goals.</p>
             <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/REPLACE_WITH_PROJECT_6_REPOSITORY" target="_blank" rel="noreferrer" data-i18n="projects.placeholderLink" data-i18n-title="projects.placeholderLink">GitHub link placeholder</a><button class="project-button project-button-details" type="button" data-project-details data-i18n="projects.viewDetails">View Details</button></div>
           </article>
+          <article class="project-card" data-project-id="project-seven" aria-haspopup="dialog" aria-controls="project-modal" tabindex="0" aria-label="Open details for Nizwa Fort Explorer" data-i18n-aria="project.card.seven">
+            <img class="project-image" src="./assets/images/nizwa-fort-explorer.png" alt="Nizwa Fort Explorer interface preview" data-i18n-alt="project.image.seven" width="1448" height="1086" loading="lazy" decoding="async" />
+            <h3 data-i18n="project.seven.title">Nizwa Fort Explorer</h3><p data-i18n="project.seven.card">A bilingual interactive 3D explorer for Nizwa Fort, built with React, TypeScript, and Three.js.</p>
+            <div class="project-actions"><a class="project-button project-button-primary" href="https://github.com/azher-devs/nizwa-fort-explorer" target="_blank" rel="noreferrer" aria-label="GitHub" title="Visit GitHub profile" data-i18n-aria="social.github" data-i18n-title="social.githubTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.75-1.31-3.75-1.31-.5-1.28-1.25-1.62-1.25-1.62-1-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.43-2.21 1.15-2.99-.12-.28-.5-1.42.1-2.95 0 0 .93-.3 3.08 1.14a10.72 10.72 0 0 1 5.6 0c2.14-1.44 3.07-1.14 3.07-1.14.61 1.53.23 2.67.11 2.95.72.78 1.15 1.77 1.15 2.99 0 4.29-2.62 5.23-5.12 5.51.4.35.76 1.04.76 2.09v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" /></svg>GitHub</a><button class="project-button project-button-details" type="button" data-project-details data-i18n="projects.viewDetails">View Details</button></div>
+          </article>
+        </div>
+        <div class="project-pagination" id="project-pagination" hidden>
+          <button class="project-show-more" type="button" id="project-show-more" aria-expanded="false" aria-controls="project-list">
+            <span data-i18n="projects.showMore">Show More Projects</span>
+            <svg class="project-show-more-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </button>
+          <p class="project-hidden-count" id="project-hidden-count" aria-live="polite"></p>
         </div>
       </section>
 
