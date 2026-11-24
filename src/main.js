@@ -11,6 +11,7 @@ const mobileLanguageLabel = document.querySelector("#mobile-language-label");
 const backToTopButton = document.querySelector("#back-to-top");
 const revealElements = document.querySelectorAll(".reveal");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mobileProjectsMedia = window.matchMedia("(max-width: 720px)");
 const projectCards = document.querySelectorAll("[data-project-id]");
 const projectFilterButtons = [...document.querySelectorAll("[data-project-filter]")];
 const projectResultsStatus = document.querySelector("#project-results-status");
@@ -217,8 +218,9 @@ function updateProjectResults({ animate = false } = {}) {
     return project && project.isVisible !== false &&
       (activeProjectCategory === "all" || project.categories?.includes(activeProjectCategory));
   });
-  const hiddenCount = Math.max(0, matchingCards.length - 3);
-  const showAll = projectsExpanded || hiddenCount === 0;
+  const isMobile = mobileProjectsMedia.matches;
+  const hiddenCount = isMobile ? Math.max(0, matchingCards.length - 3) : 0;
+  const showAll = !isMobile || projectsExpanded || hiddenCount === 0;
   const visibleCards = new Set(showAll ? matchingCards : matchingCards.slice(0, 3));
 
   projectCards.forEach((card) => {
@@ -256,8 +258,8 @@ function updateProjectResults({ animate = false } = {}) {
   projectResultsStatus.classList.toggle("is-empty", visibleCount === 0);
   const pagination = document.querySelector("#project-pagination");
   if (pagination && projectShowMore && projectHiddenCount) {
-    pagination.hidden = hiddenCount === 0;
-    projectShowMore.setAttribute("aria-expanded", String(projectsExpanded));
+    pagination.hidden = !isMobile || hiddenCount === 0;
+    projectShowMore.setAttribute("aria-expanded", String(isMobile && projectsExpanded));
     projectShowMore.querySelector("[data-i18n]").textContent = translate(projectsExpanded ? "projects.showLess" : "projects.showMore");
     projectShowMore.querySelector("svg").classList.toggle("is-expanded", projectsExpanded);
     const countKey = hiddenCount === 1 ? "projects.moreCount.one" : "projects.moreCount";
@@ -629,8 +631,14 @@ projectFilterButtons.forEach((button) => {
 });
 
 projectShowMore?.addEventListener("click", () => {
+  if (!mobileProjectsMedia.matches) return;
   projectsExpanded = !projectsExpanded;
   updateProjectResults({ animate: true });
+});
+
+mobileProjectsMedia.addEventListener("change", () => {
+  projectsExpanded = false;
+  updateProjectResults();
 });
 
 copyEmailButton?.addEventListener("click", async () => {
